@@ -20,6 +20,7 @@ var usuarioRouter = require("./src/routes/usuarios");
 var medidasRouter = require("./src/routes/medidas");
 var estoqueRouter = require("./src/routes/estoque");
 var empresasRouter = require("./src/routes/empresas");
+var dashDiariaRouter = require("./src/routes/dashDiaria")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -32,6 +33,7 @@ app.use("/usuarios", usuarioRouter);
 app.use("/medidas", medidasRouter);
 app.use("/estoque", estoqueRouter);
 app.use("/empresas", empresasRouter);
+app.use("/dashDiaria", dashDiariaRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
