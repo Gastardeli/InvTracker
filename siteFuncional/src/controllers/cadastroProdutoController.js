@@ -14,8 +14,6 @@ function cadastrarProduto(req, res) {
     var valorVenda = req.body.valorVendaServer;
 
 
-
-    // Faça as validações dos valores
     if (fkEstoque == undefined) {
         res.status(400).send(" Estoque está undefined!");
     } else if (fkLote == undefined) {
@@ -34,7 +32,7 @@ function cadastrarProduto(req, res) {
          res.status(400).send("valor venda está undefined!")
     }else {
 
-        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+      
         cadastroProdutoModel.cadastrarProduto(fkEstoque, fkLote, nomeProduto, dtFabricação, dtValidade, fabricante, valorCompra, valorVenda) // colocar os dados 
             .then(
                 function (resultado) {
@@ -53,7 +51,7 @@ function cadastrarProduto(req, res) {
     }
 }
 
-module.exports = {cadastrar};
+module.exports = {cadastrarProduto};
 
 
 
