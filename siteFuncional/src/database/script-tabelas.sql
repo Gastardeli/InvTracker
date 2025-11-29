@@ -1,6 +1,7 @@
 CREATE DATABASE invtracker;
 USE invtracker;
 
+
 CREATE TABLE empresa(
     id INT PRIMARY KEY AUTO_INCREMENT,
     statusCliente VARCHAR(8) DEFAULT 'Ativo',
@@ -49,13 +50,17 @@ FOREIGN KEY (fkEmpresa) REFERENCES empresa(id)
 );
 
 CREATE TABLE produto (
-idProduto INT PRIMARY KEY AUTO_INCREMENT,
-nome VARCHAR(50),
-marca VARCHAR(50),
-categoria VARCHAR(50),
-tamanho INT,
-dtValidade DATE,
-fabricante VARCHAR(45)
+    idProduto INT AUTO_INCREMENT PRIMARY KEY,
+    fkEstoque INT,
+    FOREIGN KEY (fkEstoque)
+        REFERENCES estoque (idEstoque),
+  
+    nomeProduto VARCHAR(50),
+    dtFabricacao DATE,
+    dtValidade DATE,
+    fabricante VARCHAR(45),
+    valorCompra DECIMAL(10 , 2 ),
+    valorVenda DECIMAL(10 , 2 )
 );
 
 CREATE TABLE sensor (
@@ -95,3 +100,7 @@ dtEntrada DATETIME,
 dtSaida DATETIME,
 PRIMARY KEY(idLote, fkEstoque, fkProduto)
 );
+
+
+alter table produto add column fkLote int;
+alter table produto add constraint fkLoteProduro foreign key (fkLote) references lote (idLote);
