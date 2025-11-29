@@ -6,7 +6,7 @@ function cadastrarProduto(fkEstoque, fkLote, nomeProduto, dtFabricação, dtVali
 
    
     var instrucaoSql = `
-        INSERT INTO funcionario (fkEstoque, fkLote, nomeProduto, dtFabricação, dtValidade, fabricante, valorCompra, valorVenda) VALUES ('${fkEstoque}', '${fkLote}', '${ nomeProduto}', '${dtFabricação}', '${dtValidade}', '${fabricante}', '${valorCompra}', ${valorVenda});
+        INSERT INTO produto  VALUES (${DEFAULT},${fkEstoque}, ${fkLote}, '${nomeProduto}', '${dtFabricação}', '${dtValidade}', '${fabricante}', '${valorCompra}', ${valorVenda});
     `;//verificar os valores inseridos nesse insert e garantir que esta igual no banco.
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
