@@ -10,13 +10,13 @@
 
     <script src="./js/sessao.js"></script>
 
-    <link rel="stylesheet" href="./css/styleCadastro.css" />
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="css/styleCadastroDashboard.css" />
+    <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="./assets/icon/icon.png" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
 </head>
 
-<body onload="listar()">
+<body>
     <div class="container_main">
         <aside>
             <header>
@@ -36,10 +36,7 @@
                     <p><b>Cadastrar Estoque</b></p>
                 </a>
             </div>
-            <div id="icon_help">
-                <a href="https://invtracker.atlassian.net/servicedesk/customer/portals"><img
-                        src="../public/assets/icon/ponto-de-interrogacao.png" alt="" class="icon_help"></a>
-            </div>
+
             <div class="footer">
                 <img src="assets/icon/iconUser.png" alt="">
                 <div class="footerTexto"> Olá! User</div>
@@ -98,24 +95,24 @@
 
     </div>
 
-    <script src="script/scriptCadastroDashboard.js"></script>
 
 </html>
 
 <script>
-    // Array para armazenar empresas cadastradas para validação de código de ativação
-    let listaEmpresasCadastradas = [];
-    var estoqueVar = Number(estoques.value);
-    var loteVar = Number(lotes.value);
-    var produtoVar = input_produto.value;
-    var dataFabVar = input_dtFab.value;
-    var dataValVar = input_dtValidade.value;
-    var fabricanteVar = input_fabricante.value;
-    var valorCompra = input_compraLote.value;
-    var valorVenda = input_vendaLote.value;
-    var idEmpresaVincular; // = store já logado
+
 
     function cadastrarProduto() {
+        // Array para armazenar empresas cadastradas para validação de código de ativação
+        let listaEmpresasCadastradas = [];
+        var estoqueVar = Number(estoques.value);
+        var loteVar = Number(lotes.value);
+        var produtoVar = input_produto.value;
+        var dataFabVar = input_dtFab.value;
+        var dataValVar = input_dtValidade.value;
+        var fabricanteVar = input_fabricante.value;
+        var valorCompraVar = input_compraLote.value;
+        var valorVendaVar = input_vendaLote.value;
+        var idEmpresaVincular; // = store já logado
 
         if (
             produtoVar == "" ||
@@ -125,24 +122,17 @@
             valorCompraVar == "" ||
             valorVendaVar == ""
         ) {
-            modal_cadastro.innerHTML =
-                `<span style="color: red">Campos em branco, favor preencher.</span>`;
-            modal_cadastro_grande.style.display = 'block';
-            setInterval(sumirMensagem, 5000);
-
             return false;
         } else {
             setInterval(sumirMensagem, 5000);
 
             // Enviando o valor da nova input
-            fetch("/usuarios/cadastrar", {
+            fetch("/cadastroProduto/cadastrarProduto", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    // crie um atributo que recebe o valor recuperado aqui
-                    // Agora vá para o arquivo routes/usuario.js
                     estoqueServer: estoqueVar,
                     loteServer: loteVar,
                     produtoServer: produtoVar,
@@ -157,19 +147,7 @@
                 .then(function (resposta) {
                     console.log("resposta: ", resposta);
 
-                    if (resposta.ok && senhaForte > 3) {
-                        modal_cadastro.innerHTML = `<span style="color:green">Registrado com Sucesso!</span>`;
-                        modal_cadastro_grande.style.display = "block";
-
-                        setTimeout(() => {
-                            window.location.href = "login.html";
-                        }, "5000");
-
-                        limparFormulario();
-
-                    } else {
-                        throw "Houve um erro ao tentar realizar o cadastro!";
-                    }
+                    
                 })
                 .catch(function (resposta) {
                     console.log(`#ERRO: ${resposta}`);
@@ -180,24 +158,24 @@
         }
     }
     // Listando empresas cadastradas
-   /* function listar() {
-        fetch("/empresas/listar", {
-            method: "GET",
-        })
-            .then(function (resposta) {
-                resposta.json().then((empresas) => {
-                    empresas.forEach((empresa) => {
-                        listaEmpresasCadastradas.push(empresa);
-
-                        console.log("listaEmpresasCadastradas");
-                        console.log(listaEmpresasCadastradas[0].codigo_ativacao);
-                    });
-                });
-            })
-            .catch(function (resposta) {
-                console.log(`#ERRO: ${resposta}`);
-            });
-    }*/
+    /* function listar() {
+         fetch("/empresas/listar", {
+             method: "GET",
+         })
+             .then(function (resposta) {
+                 resposta.json().then((empresas) => {
+                     empresas.forEach((empresa) => {
+                         listaEmpresasCadastradas.push(empresa);
+ 
+                         console.log("listaEmpresasCadastradas");
+                         console.log(listaEmpresasCadastradas[0].codigo_ativacao);
+                     });
+                 });
+             })
+             .catch(function (resposta) {
+                 console.log(`#ERRO: ${resposta}`);
+             });
+     }*/
 
     // Verificando se o código de ativação é de alguma empresa cadastrada
     /* for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
