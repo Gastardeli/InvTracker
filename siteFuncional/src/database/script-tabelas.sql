@@ -2,6 +2,7 @@ CREATE DATABASE invtracker;
 USE invtracker;
 
 
+
 CREATE TABLE empresa(
     id INT PRIMARY KEY AUTO_INCREMENT,
     statusCliente VARCHAR(8) DEFAULT 'Ativo',
@@ -48,13 +49,24 @@ fkEmpresa INT,
 CONSTRAINT fkEmpresaEstoque
 FOREIGN KEY (fkEmpresa) REFERENCES empresa(id)
 );
+SELECT 
+    *
+FROM
+    estoque;
+INSERT INTO estoque (tamanho, estoque, fkEmpresa) VALUES 
+(5.50, 'Estoque Central - A1', 1),
+(2.00, 'Estoque Frios - A2', 1),
+(1.75, 'Estoque Secos - A3', 1);
+
+INSERT INTO estoque (tamanho, estoque, fkEmpresa) VALUES
+(6.00, 'Câmara Congelamento - S1', 2),
+(1.00, 'Estoque Embalagens - S2', 2),
+(3.50, 'Estoque Ingredientes - S3', 2);
+
+
 
 CREATE TABLE produto (
     idProduto INT AUTO_INCREMENT PRIMARY KEY,
-    fkEstoque INT,
-    FOREIGN KEY (fkEstoque)
-        REFERENCES estoque (idEstoque),
-  
     nomeProduto VARCHAR(50),
     dtFabricacao DATE,
     dtValidade DATE,
@@ -85,22 +97,14 @@ PRIMARY KEY(idRegistro, fkSensor)
 );
 
 CREATE TABLE lote (
-idLote INT AUTO_INCREMENT,
-numLote INT,
-fkEstoque INT,
-CONSTRAINT fkEstoqueLote
-FOREIGN KEY (fkEstoque) REFERENCES estoque(idEstoque),
-fkProduto INT,
-CONSTRAINT fkProdutoLote
-FOREIGN KEY (fkProduto) REFERENCES produto(idProduto),
-fkSensor INT,
-CONSTRAINT fkSensorLote
-FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor),
-dtEntrada DATETIME,
-dtSaida DATETIME,
-PRIMARY KEY(idLote, fkEstoque, fkProduto)
+    fkProduto INT,
+    fkEstoque INT,
+    fkSensor INT,
+    dtEntrada DATETIME,
+    dtSaida DATETIME,
+    PRIMARY KEY (fkProduto, fkEstoque),
+    FOREIGN KEY (fkProduto) REFERENCES produto(idProduto),
+    FOREIGN KEY (fkEstoque) REFERENCES estoque(idEstoque),
+    FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor)
 );
 
-
-alter table produto add column fkLote int;
-alter table produto add constraint fkLoteProduro foreign key (fkLote) references lote (idLote);
