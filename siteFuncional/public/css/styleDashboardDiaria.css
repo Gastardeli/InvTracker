@@ -148,8 +148,22 @@
     color: black;
     marker: none;
 }
-.icon_help{
-    width: 25px;
-    margin-top: 400px;
-    margin-left: 400px;
+
+.iconHelpDiv {
+    height: 10%;
+    width: 10%;
+    display: flex;
+    align-self: flex-end;
+    justify-content: flex-end;
+    align-items: flex-end;
+    text-align: center;
+}
+
+.iconHelpDiv a {
+    margin-top: 30px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    align-self: center;
+    margin-right: 20px;
 }

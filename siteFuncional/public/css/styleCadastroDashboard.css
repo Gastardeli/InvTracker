@@ -139,8 +139,30 @@
     font-size: 15px;
 }
 
-.icon_help{
-    width: 35px;
-    margin-top: 400px;
-    margin-left: 450px;
+.iconHelpDiv {
+    height: 10%;
+    width: 10%;
+    display: flex;
+    align-self: flex-end;
+    justify-content: flex-end;
+    align-items: flex-end;
+    text-align: center;
+}
+
+.iconHelpDiv a {
+    margin-top: 30px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    align-self: center;
+    margin-right: 20px;
+}
+
+.container_main aside .body {
+    justify-content: center;
+    height: 80%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
