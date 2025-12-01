@@ -201,10 +201,10 @@ CREATE VIEW VW_DashboardDiaria AS -- Todas as minhas observações estão no úl
         '' AS valor3
     FROM lote l
     JOIN sensor s ON s.idSensor = l.fkSensor
-    JOIN registro r ON r.fkRegistroSensor = s.idSensor
+    JOIN registro r ON r.fkSensor = s.idSensor -- FK corrigida (antes era fkRegistroSensor)
     JOIN estoque e ON e.idEstoque = l.fkEstoque
-    WHERE e.fkClienteEstoque = '${idUser}'
-      AND r.distancia < 'X'
+    WHERE e.fkEmpresa = '${idUser}' -- Antes era fkClienteEstoque
+      AND r.distancia < 'X' -- Distância crítica deve ser definida
 )
 
 UNION ALL
@@ -219,10 +219,10 @@ UNION ALL
     FROM estoque e
     JOIN lote l ON l.fkEstoque = e.idEstoque
     JOIN sensor s ON s.idSensor = l.fkSensor
-    JOIN registro r ON r.fkRegistroSensor = s.idSensor
-    WHERE e.fkClienteEstoque = '${idUser}'
+    JOIN registro r ON r.fkSensor = s.idSensor -- FK corrigida
+    WHERE e.fkEmpresa = '${idUser}'
     GROUP BY e.idEstoque
-    ORDER BY AVG(r.distancia) ASC
+    ORDER BY AVG(r.distancia) ASC -- Estoque com menor média de distância = mais crítico
     LIMIT 1
 )
 
@@ -232,14 +232,14 @@ UNION ALL
     -- KPI 3: Lote mais próximo do vencimento
     SELECT
         'kpi_vencimento' AS tipo,
-        CONCAT(l.idLote) AS valor,
+        CONCAT(l.fkProduto, '-', l.fkEstoque) AS valor, -- idLote não existe mais → identificador composto
         CONCAT(e.idEstoque) AS valor2,
         CONCAT(p.dtValidade) AS valor3
     FROM lote l
     JOIN produto p ON p.idProduto = l.fkProduto
     JOIN estoque e ON e.idEstoque = l.fkEstoque
-    WHERE e.fkClienteEstoque = '${idUser}'
-    ORDER BY p.dtValidade ASC
+    WHERE e.fkEmpresa = '${idUser}'
+    ORDER BY p.dtValidade ASC -- Menor data = mais próximo do vencimento
     LIMIT 1
 )
 
@@ -260,33 +260,32 @@ UNION ALL
     -- Gráfico 2: Lotes críticos
     SELECT
         'grafico_criticos' AS tipo, -- Todos que tem '... AS tipo' devem ser usados num .filter do console, basicamente
-        CONCAT(l.idLote) AS valor,  -- para facilitar a vida de vcs.
+        CONCAT(l.fkProduto, '-', l.fkEstoque) AS valor,  -- para facilitar a vida de vcs. Antes usava idLote (não existe)
         CONCAT(e.idEstoque) AS valor2,
         CONCAT(r.distancia) AS valor3
     FROM estoque e
     JOIN lote l ON l.fkEstoque = e.idEstoque
     JOIN sensor s ON s.idSensor = l.fkSensor
-    JOIN registro r ON r.fkRegistroSensor = s.idSensor
-    WHERE e.fkClienteEstoque = '${idUser}' -- Isso aqui é onde vem o params do user, pra puxar somente do estoque dele.
+    JOIN registro r ON r.fkSensor = s.idSensor -- FK corrigida
+    WHERE e.fkEmpresa = '${idUser}' -- Isso aqui é onde vem o params do user, pra puxar somente do estoque dele.
       AND r.distancia < 'X' -- Incluir aqui a distância que passa a ser crítico; Não sei qual é, então deixei assim :D
 );
 
-
-CREATE VIEW VW_DashboardEstoque AS -- Mesma coisa aqui, comentários no último SELECT
+CREATE VIEW VW_DashboardEstoque AS 
 
 (
     -- Gráfico 1: Ocupação dos lotes
     SELECT
         'grafico_ocupacao' AS tipo,
-        CONCAT(l.idLote) AS valor,
+        CONCAT(l.fkProduto, '-', l.fkEstoque) AS valor,
         CONCAT(r.distancia) AS valor2,
         '' AS valor3
     FROM lote l
-    JOIN sensor s ON s.idSensor = l.fkSensor
-    JOIN registro r ON r.fkRegistroSensor = s.idSensor
     JOIN estoque e ON e.idEstoque = l.fkEstoque
-    WHERE l.fkEstoque = '${idEstoque}' 
-		AND e.fkClienteEstoque = '${idUser}'
+    JOIN sensor s ON s.idSensor = l.fkSensor
+    JOIN registro r ON r.fkSensor = s.idSensor
+    WHERE l.fkEstoque = ${idEstoque}
+      AND e.fkEmpresa = ${idUser}
 )
 
 UNION ALL
@@ -295,15 +294,15 @@ UNION ALL
     -- KPI 1: Lote com maior necessidade de reposição
     SELECT
         'kpi_lote_critico' AS tipo,
-        CONCAT(l.idLote) AS valor,
+        CONCAT(l.fkProduto, '-', l.fkEstoque) AS valor,
         CONCAT(r.distancia) AS valor2,
         '' AS valor3
     FROM lote l
-    JOIN sensor s ON s.idSensor = l.fkSensor
-    JOIN registro r ON r.fkRegistroSensor = s.idSensor
     JOIN estoque e ON e.idEstoque = l.fkEstoque
-    WHERE l.fkEstoque = '${idEstoque}'
-		AND e.fkClienteEstoque = '${idUser}'
+    JOIN sensor s ON s.idSensor = l.fkSensor
+    JOIN registro r ON r.fkSensor = s.idSensor
+    WHERE l.fkEstoque = ${idEstoque}
+      AND e.fkEmpresa = ${idUser}
     ORDER BY r.distancia ASC
     LIMIT 1
 )
@@ -311,19 +310,19 @@ UNION ALL
 UNION ALL
 
 (
-    -- KPI 2: Quantos lotes precisam de reabastecimento
+    -- KPI 2: Quantos lotes estão abaixo do nível crítico
     SELECT
         'kpi_qtd_criticos' AS tipo,
         CONCAT(COUNT(*)) AS valor,
         '' AS valor2,
         '' AS valor3
     FROM lote l
-    JOIN sensor s ON s.idSensor = l.fkSensor
-    JOIN registro r ON r.fkRegistroSensor = s.idSensor
     JOIN estoque e ON e.idEstoque = l.fkEstoque
-    WHERE l.fkEstoque = '${idEstoque}'
-      AND r.distancia < 'X'
-	  AND e.fkClienteEstoque = '${idUser}'
+    JOIN sensor s ON s.idSensor = l.fkSensor
+    JOIN registro r ON r.fkSensor = s.idSensor
+    WHERE l.fkEstoque = ${idEstoque}
+      AND r.distancia < X
+      AND e.fkEmpresa = ${idUser}
 )
 
 UNION ALL
@@ -331,17 +330,17 @@ UNION ALL
 (
     -- Gráfico 2: Lotes em estado crítico
     SELECT
-        'grafico_criticos' AS tipo, -- Usem isso no .filter, vai facilitar mt
-        CONCAT(l.idLote) AS valor,      -- id do lote
-        CONCAT(r.distancia) AS valor2,  -- distancia do sensor pro topo do lote
-        '' AS valor3 -- Esse campo com aspas vazias pode parecer estranho, mas a explicação é longa, então vou comentar fora da VIEW
+        'grafico_criticos' AS tipo,
+        CONCAT(l.fkProduto, '-', l.fkEstoque) AS valor,
+        CONCAT(r.distancia) AS valor2,
+        '' AS valor3
     FROM lote l
-    JOIN sensor s ON s.idSensor = l.fkSensor
-    JOIN registro r ON r.fkRegistroSensor = s.idSensor
     JOIN estoque e ON e.idEstoque = l.fkEstoque
-    WHERE l.fkEstoque = '${idEstoque}'
-      AND r.distancia < 'X' -- Mesma coisa, não sei a distância crítica
-	  AND e.fkClienteEstoque = '${idUser}'
+    JOIN sensor s ON s.idSensor = l.fkSensor
+    JOIN registro r ON r.fkSensor = s.idSensor
+    WHERE l.fkEstoque = ${idEstoque}
+      AND r.distancia < X
+      AND e.fkEmpresa = ${idUser}
 );
 
 -- Aqueles campos com aspas vazias existem pq é o único jeito de fazer parar de dar erro que encontrei...
