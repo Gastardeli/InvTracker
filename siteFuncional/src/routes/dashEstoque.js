@@ -1,12 +1,11 @@
 var express = require("express");
 var router = express.Router();
 
-var estoqueController = require("../controllers/estoqueDashController");
+var estoqueController = require("../controllers/estoqueController"); 
 
-//Recebendo os dados do html e direcionando para a função cadastrar de usuarioController.js
-router.post("/buscarEstoquePorEmpresa", function (req, res) {
-  estoqueController.buscarEstoquePorEmpresa(req, res);
+
+router.get("/dashEstoquelistar", function (req, res) {
+  estoqueController.dashEstoquelistar(req, res); 
 })
 
 module.exports = router;
-
