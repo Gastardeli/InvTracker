@@ -144,7 +144,8 @@
                         sessionStorage.EMAIL_USUARIO = json.email;
                         sessionStorage.NOME_USUARIO = json.nome;
                         sessionStorage.ID_USUARIO = json.id;
-                        sessionStorage.ESTOQUE = JSON.stringify(json.estoques);
+                        sessionStorage.ID_EMPRESA = json.id_empresa;
+                       
 
                         setTimeout(function () {
                             modal_login.innerHTML =
@@ -152,7 +153,7 @@
                             modal_login_grande.style.display = "block";
 
                             setTimeout(() => {
-                                window.location.href = "dashboardDiaria.html";
+                                // window.location.href = "dashboardDiaria.html";
                             }, "5000");
                         }, 1000); // apenas para exibir o loading
                     });
