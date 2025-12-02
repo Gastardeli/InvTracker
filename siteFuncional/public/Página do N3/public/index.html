@@ -35,7 +35,7 @@
                 </a>
             </div>
             <div class="footer">
-                <div class="footerTexto"> User</div>
+                <div id="username" class="footerTexto"></div>
                 <div class="logout">
                     <a href="http://localhost:3333"><button>Sair</button></a>
                 </div>
@@ -61,6 +61,8 @@
 </html>
 
 <script>
+    
+    username.innerHTML = sessionStorage.NOME_USUARIO;
         
         async function gerarResposta() {
             const pergunta = document.getElementById('pergunta').value;
