@@ -189,7 +189,7 @@ CREATE OR REPLACE VIEW vw_kpiEstoqueVazio AS
             AND r.dtRegistro = last_r.ultimoRegistro
     ORDER BY r.distancia DESC
     LIMIT 1;
-    
+
 -- -----------------------------------------------------------------------
 CREATE OR REPLACE VIEW vw_kpiQtdLotesReposicao AS
     SELECT 
@@ -214,3 +214,6 @@ CREATE OR REPLACE VIEW vw_kpiQtdLotesReposicao AS
     WHERE
         r.distancia > (e.tamanho * 0.80);
         -- OBS: COLOCAR WHERE empresa.id = ${}
+
+        -- KPI -  Precisa funcionar TASK - Gustavo Pietro 
+        

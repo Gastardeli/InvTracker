@@ -187,3 +187,11 @@ body {
     height: 150px;
     width: 150px;
 }
+
+button{
+    background-color: #E67C1C;
+    color: black;
+    border-radius: 4px ;
+    width: 90px;
+    padding: 15px;
+}
