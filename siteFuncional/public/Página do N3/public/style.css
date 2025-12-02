@@ -181,6 +181,7 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
+    color:black;
 }
 
 .body img {
@@ -190,8 +191,12 @@ body {
 
 button{
     background-color: #E67C1C;
-    color: black;
+    color: white;
     border-radius: 4px ;
-    width: 90px;
+    width: 190px;
     padding: 15px;
+    border: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bolder;
 }
+
