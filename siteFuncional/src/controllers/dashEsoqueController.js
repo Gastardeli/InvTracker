@@ -1,14 +1,24 @@
-var dashDiariaModel = require("../models/dashDiariaModel");
+const dashDiariaModel = require("../models/estoqueDashModel");
 
-
-function dashEstoquelistar(req, res) {
-    dashDiariaModel.dashEstoquelistar().then(function(resultado){
-        res.status(200).json(resultado);
+function graficoDoisEstadoCritico(req, res) {
+    dashDiariaModel.graficoDoisEstadoCritico().then(function(resultado){
+        res.status(200).json({ graficoPersonagens: resultado });
     }).catch(function(erro){
-        res.status(500).json(erro.sqlMessage);
-    })
+        console.error("Erro no controller:", erro); // ← adicione isso para debug
+        res.status(500).json({ error: erro.sqlMessage || erro.message });
+    });
+}
+
+function graficoOcupacaoLotes(req, res) {
+    dashDiariaModel.graficoOcupacaoLotes().then(function(resultado){
+        res.status(200).json({ graficoPersonagens: resultado });
+    }).catch(function(erro){
+        console.error("Erro no controller:", erro);
+        res.status(500).json({ error: erro.sqlMessage || erro.message });
+    });
 }
 
 module.exports = {
-    dashEstoquelistar
-}
+    graficoDoisEstadoCritico,
+    graficoOcupacaoLotes
+};

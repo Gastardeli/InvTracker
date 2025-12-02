@@ -1,11 +1,15 @@
 var express = require("express");
 var router = express.Router();
 
-var estoqueController = require("../controllers/estoqueController"); 
+var estoqueController = require("../controllers/dashEsoqueController"); 
 
 
-router.get("/dashEstoquelistar", function (req, res) {
-  estoqueController.dashEstoquelistar(req, res); 
+router.get("/graficoDoisEstadoCritico", function (req, res) {
+  estoqueController.graficoDoisEstadoCritico(req, res); 
 })
+router.get("/graficoOcupacaoLotes", function (req, res) {
+  estoqueController.graficoOcupacaoLotes(req, res); 
+})
+
 
 module.exports = router;
