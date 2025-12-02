@@ -26,9 +26,19 @@ function kpiEstoqueVazio(req, res) {
     })
 }
 
+function deletarRegistro(req, res) {
+    var idEmpresa = req.params.idEmpresa;
+    dashDiariaModel.deletarRegistro(idEmpresa).then(function (resultado){
+         res.status(200).json(resultado);
+    }).catch(function (erro) {
+        res.status(500).json(erro.sqlMessage);
+    })
+}
+
 
 module.exports = {
     kpiEstoqueVazio,
     kpiQtdLotesReposicao,
-    kpiProdutoVencido
+    kpiProdutoVencido,
+    deletarRegistro
 }

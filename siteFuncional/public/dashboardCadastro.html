@@ -43,7 +43,7 @@
 
             <div class="footer">
                 <img src="assets/icon/iconUser.png" alt="">
-                <div class="footerTexto"> Olá! User</div>
+                <div class="footerTexto"><span id="nomeUsuario"></span></div>
                 <div class="logout">
                     <a href="index.html"><button>Sair</button></a>
                 </div>
@@ -101,6 +101,8 @@
 </html>
 
 <script>
+    const nomeUser = document.getElementById("nomeUsuario");
+    nomeUser.innerHTML = `Olá! ${sessionStorage.NOME_USUARIO}`
 
 
     function cadastrarProduto() {

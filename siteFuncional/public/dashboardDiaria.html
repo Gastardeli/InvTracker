@@ -42,7 +42,7 @@
 
             <div class="footer">
                 <img src="assets/icon/iconUser.png" alt="">
-                <div class="footerTexto"> Olá! User</div>
+                <div class="footerTexto"><span id="nomeUsuario"></span></div>
                 <div class="logout">
                     <a href="index.html"><button>Sair</button></a>
                 </div>
@@ -59,7 +59,7 @@
                     </div>
                     <div class="kpi">
                         <p class="titulo">Estoque com maior necessidade de Reposição
-                            <span style="color: red">Estoque 3
+                            <span style="color: red" id="kpi2">
                         </p>
                         </span>
                     </div>
@@ -68,7 +68,8 @@
                             <span id="kpi3">
                             </span>
                         </p>
-                    </div>
+                    </div> <br>
+                    <button class="botaoDeletar" onclick="deletarRegistrar()">Deletar Registro mais antigo</button>
                 </div>
                 <div class="dash_direita">
                     <canvas id="dashboard2"></canvas>
@@ -83,6 +84,8 @@
 </html>
 
 <Script>
+    const nomeUser = document.getElementById("nomeUsuario");
+    nomeUser.innerHTML = `Olá! ${sessionStorage.NOME_USUARIO}`
 
     const dashboardEstoque = document.getElementById('dashboardEstoque');
 
@@ -266,6 +269,10 @@
         }
     });
 
+    const kpi2 = document.getElementById("kpi2");
+
+    
+
     const kpi3 = document.getElementById("kpi3");
 
     fetch(`/dashDiaria/kpiProdutoVencido/${sessionStorage.ID_EMPRESA}`)
@@ -292,6 +299,29 @@
         .catch(erro => {
             console.error('Erro na requisição:', erro);
         });
+
+        function deletarRegistrar() {
+            fetch(`/dashDiaria/deletarRegistro/${sessionStorage.ID_EMPRESA}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+    .then(function (resposta) {
+        setTimeout(function () {
+                            kpi3.innerHTML =
+                                `<span style="color:#E67C1C">Atualizando Produtos...</span>`;
+                            setTimeout(() => {
+                                window.location.reload()
+                            }, "5000");
+                        }, 1000);
+
+        if (!resposta.ok) {
+            
+            throw new Error('Erro na requisição: ' + resposta.statusText);
+        }
+    })
+}
 
 
 </Script>

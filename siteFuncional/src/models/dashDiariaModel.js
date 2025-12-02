@@ -27,9 +27,29 @@ function kpiEstoqueVazio() {
     return database.executar(instrucao);
 }
 
+function deletarRegistro(idEmpresa) {
+    var instrucao = `
+    DELETE FROM lote
+    WHERE idLote = (
+        SELECT idLote FROM (
+            SELECT 
+                l.idLote
+            FROM lote l
+            JOIN produto p ON l.fkProduto = p.idProduto
+            WHERE l.fkEmpresa = ${idEmpresa}
+            ORDER BY dtValidade ASC
+            LIMIT 1
+        ) AS DeleteRegistro
+    );
+    `;
+        console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 module.exports = {
     kpiProdutoVencido,
     kpiQtdLotesReposicao,
-    kpiEstoqueVazio
+    kpiEstoqueVazio,
+    deletarRegistro
 };
 

@@ -88,10 +88,10 @@ CREATE TABLE lote (
     fkSensor INT,
     dtEntrada DATETIME,
     dtSaida DATETIME,
-    PRIMARY KEY (idLote, fkProduto, fkEstoque, fkEmpresa),
     FOREIGN KEY (fkProduto) REFERENCES produto(idProduto),
     FOREIGN KEY (fkEstoque, fkEmpresa) REFERENCES estoque(idEstoque, fkEmpresa),
-    FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor)
+    FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor),
+    PRIMARY KEY (idLote, fkProduto, fkEstoque, fkEmpresa)
 );
 
 INSERT INTO estoque (idEstoque, tamanho, estoqueNome, fkEmpresa) VALUES
@@ -153,9 +153,9 @@ SELECT
     END AS diasParaVencer
 
 FROM produto p
-LEFT JOIN lote l 
+JOIN lote l 
        ON l.fkProduto = p.idProduto
-LEFT JOIN estoque e 
+JOIN estoque e 
        ON e.idEstoque = l.fkEstoque
       AND e.fkEmpresa = l.fkEmpresa
 
@@ -167,18 +167,15 @@ LIMIT 1;
 CREATE OR REPLACE VIEW vw_kpiEstoqueVazio AS
     SELECT 
         e.idEstoque,
+        e.fkEmpresa AS idEmpresa,
         e.estoqueNome AS nomeEstoque,
-        emp.razao AS empresa,
         e.tamanho AS capacidadeTotal,
-        r.distancia AS espacoVazio,
-        (e.tamanho - r.distancia) AS espacoOcupado,
-        ROUND((r.distancia / e.tamanho) * 100, 2) AS porcentagemVazio
+        r.distancia AS espacoVazio
     FROM
         lote l
             JOIN
         estoque e ON e.idEstoque = l.fkEstoque
-            JOIN
-        empresa emp ON emp.id = e.fkEmpresa
+        AND e.fkEmpresa = l.fkEmpresa
             JOIN
         sensor s ON s.idSensor = l.fkSensor
             JOIN
@@ -217,33 +214,3 @@ CREATE OR REPLACE VIEW vw_kpiQtdLotesReposicao AS
     WHERE
         r.distancia > (e.tamanho * 0.80);
         -- OBS: COLOCAR WHERE empresa.id = ${}
-        
-        CREATE OR REPLACE VIEW vw_kpiEstoqueVazio AS
-    SELECT 
-        e.idEstoque,
-        e.estoqueNome AS nomeEstoque,
-        emp.razao AS empresa,
-        e.tamanho AS capacidadeTotal,
-        e.fkEmpresa as idEmpresa,
-        r.distancia AS espacoVazio,
-        (e.tamanho - r.distancia) AS espacoOcupado,
-        ROUND((r.distancia / e.tamanho) * 100, 2) AS porcentagemVazio
-    FROM
-        lote l
-            JOIN
-        estoque e ON e.idEstoque = l.fkEstoque
-            JOIN
-        empresa emp ON emp.id = e.fkEmpresa
-            JOIN
-        sensor s ON s.idSensor = l.fkSensor
-            JOIN
-        (SELECT 
-            fkSensor, MAX(dtRegistro) AS ultimoRegistro
-        FROM
-            registro
-        GROUP BY fkSensor) last_r ON last_r.fkSensor = s.idSensor
-            JOIN
-        registro r ON r.fkSensor = s.idSensor
-            AND r.dtRegistro = last_r.ultimoRegistro
-    ORDER BY r.distancia DESC
-    LIMIT 1;

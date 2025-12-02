@@ -4,7 +4,7 @@ const loteModel = require("../models/loteModel");
 
 function cadastrarProduto(req, res) {
 
-    var fkEstoque = req.body.estoqueServer;
+    var fkEstoque = req.body.fkEmpresaServer;
     var nome = req.body.produtoServer;
     var fab = req.body.dataFabServer;
     var val = req.body.dataValServer;
@@ -12,7 +12,7 @@ function cadastrarProduto(req, res) {
     var compra = req.body.valorCompraServer;
     var venda = req.body.valorVendaServer;
     var idLote = req.body.loteServer;
-    var fkEmpresa = req.body.fkEmpresaServer;
+    var fkEmpresa = req.body.estoqueServer;
 
 
     produtoModel.cadastrarProduto(nome, fab, val, fabricante, compra, venda)
