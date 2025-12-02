@@ -11,6 +11,8 @@ function cadastrarProduto(req, res) {
     var fabricante = req.body.fabricanteServer;
     var compra = req.body.valorCompraServer;
     var venda = req.body.valorVendaServer;
+    var idLote = req.body.loteServer;
+    var fkEmpresa = req.body.fkEmpresaServer;
 
 
     produtoModel.cadastrarProduto(nome, fab, val, fabricante, compra, venda)
@@ -18,7 +20,7 @@ function cadastrarProduto(req, res) {
 
             const idProduto = resultado.insertId;
 
-            return loteModel.cadastrarLote(idProduto, fkEstoque);
+            return loteModel.cadastrarLote(idLote, idProduto, fkEmpresa, fkEstoque);
         })
         .then(() => {
             res.json({ msg: "Produto + Lote cadastrados com sucesso!" });

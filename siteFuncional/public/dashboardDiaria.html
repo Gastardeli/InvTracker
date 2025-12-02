@@ -33,12 +33,13 @@
                 <a href="dashboardCadastro.html">
                     <p>Cadastrar Estoque</p>
                 </a>
-                  
+
             </div>
             <div id="icon_help" class="iconHelpDiv">
-                <a href="https://invtracker.atlassian.net/servicedesk/customer/portals" ><span>Central de Atendimento</span></a>
+                <a href="https://invtracker.atlassian.net/servicedesk/customer/portals"><span>Central de
+                        Atendimento</span></a>
             </div>
-           
+
             <div class="footer">
                 <img src="assets/icon/iconUser.png" alt="">
                 <div class="footerTexto"> Olá! User</div>
@@ -63,9 +64,8 @@
                         </span>
                     </div>
                     <div class="kpi">
-                        <p class="titulo">Lote mais próximo do vencimento
-                            <span style="color: red">Lote 3 - Estoque 1 -
-                                (31/10/2025)
+                        <p class="titulo">Produto proximo do vencimento
+                            <span id="kpi3">
                             </span>
                         </p>
                     </div>
@@ -265,5 +265,33 @@
             }
         }
     });
+
+    const kpi3 = document.getElementById("kpi3");
+
+    fetch(`/dashDiaria/kpiProdutoVencido/${sessionStorage.ID_EMPRESA}`)
+        .then(resposta => resposta.json())
+        .then(produto => {
+            if (produto.length == 0) {
+                kpi3.innerHTML = `Não há nenhum produto cadastrado.`
+            }
+            var data = produto[0].dtValidade;
+            var dataConvertida = new Date(data);
+            var venceu = produto[0].diasParaVencer
+            var dataFormatada = dataConvertida.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+
+            if (venceu == 'Vencido') {
+                venceu = `<span style="color: red; font-weight: bold">${produto[0].diasParaVencer}!</span>`
+            } else {
+                venceu = `<span style="color: blue; font-weight: bold">Faltam ${produto[0].diasParaVencer} dias para vencer</span>`
+            }
+
+            kpi3.innerHTML = `${produto[0].nomeProduto} <br> Validade ${dataFormatada} <br> Estoque: ${produto[0].idEstoque} <br> Lote: ${produto[0].idLote} <br> ${venceu}`
+
+            console.log(produto);
+        })
+        .catch(erro => {
+            console.error('Erro na requisição:', erro);
+        });
+
 
 </Script>

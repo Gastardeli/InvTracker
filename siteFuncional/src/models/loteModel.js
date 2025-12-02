@@ -3,12 +3,14 @@
 var database = require("../database/config");
 
 
-function cadastrarLote(fkProduto, fkEstoque,) {
+function cadastrarLote(idLote, fkProduto, fkEstoque, fkEmpresa) {
 
     var instrucao = `
-        INSERT INTO lote (fkProduto, fkEstoque, fkSensor, dtEntrada, dtSaida)
+        INSERT INTO lote (idLote, fkProduto, fkEmpresa, fkEstoque, fkSensor, dtEntrada, dtSaida)
         VALUES (
+            ${idLote},
             ${fkProduto},
+            ${fkEmpresa},
             ${fkEstoque},
             null,
             NOW(),

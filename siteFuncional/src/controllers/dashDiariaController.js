@@ -9,7 +9,8 @@ function kpiQtdLotesReposicao(req, res) {
     })
 }
 function kpiProdutoVencido(req, res) {
-    dashDiariaModel.kpiProdutoVencido().then(function (resultado) {
+    var idEmpresa = req.params.idEmpresa;
+    dashDiariaModel.kpiProdutoVencido(idEmpresa).then(function (resultado) {
         // precisamos informar que o resultado voltará para o front-end como uma resposta em json
         res.status(200).json(resultado);
     }).catch(function (erro) {

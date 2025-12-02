@@ -36,8 +36,9 @@
                     <p><b>Cadastrar Estoque</b></p>
                 </a>
             </div>
-             <div id="icon_help" class="iconHelpDiv">
-                <a href="https://invtracker.atlassian.net/servicedesk/customer/portals" ><span>Central de Atendimento</span></a>
+            <div id="icon_help" class="iconHelpDiv">
+                <a href="https://invtracker.atlassian.net/servicedesk/customer/portals"><span>Central de
+                        Atendimento</span></a>
             </div>
 
             <div class="footer">
@@ -68,8 +69,6 @@
                     <b>Selecione o Estoque e Lote desejados</b>
                     <select id="estoques">
                         <option value="1">Estoque 1</option>
-                        <option value="2">Estoque 2</option>
-                        <option value="3">Estoque 3</option>
                         <option disabled selected value="#">Selecione uma Opção</option>
                     </select>
                     <select id="lotes">
@@ -115,7 +114,7 @@
         var fabricanteVar = input_fabricante.value;
         var valorCompraVar = input_compraLote.value;
         var valorVendaVar = input_vendaLote.value;
-        var idEmpresaVincular; // = store já logado
+        var idEmpresaVincular = Number(sessionStorage.ID_EMPRESA)
 
         if (
             produtoVar == "" ||
@@ -135,7 +134,10 @@
                 headers: {
                     "Content-Type": "application/json",
                 },
+
+
                 body: JSON.stringify({
+
                     estoqueServer: estoqueVar,
                     loteServer: loteVar,
                     produtoServer: produtoVar,
@@ -144,13 +146,14 @@
                     idEmpresaVincularServer: idEmpresaVincular,
                     fabricanteServer: fabricanteVar,
                     valorCompraServer: valorCompraVar,
-                    valorVendaServer: valorVendaVar
+                    valorVendaServer: valorVendaVar,
+                    fkEmpresaServer: idEmpresaVincular
                 }),
             })
                 .then(function (resposta) {
                     console.log("resposta: ", resposta);
 
-                    
+
                 })
                 .catch(function (resposta) {
                     console.log(`#ERRO: ${resposta}`);
