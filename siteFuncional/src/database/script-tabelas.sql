@@ -82,16 +82,16 @@ PRIMARY KEY(idRegistro, fkSensor)
 
 CREATE TABLE lote (
 	idLote INT,
-    fkProduto INT,
+    fkProduto INT NULL,
     fkEmpresa INT,
     fkEstoque INT,
-    fkSensor INT,
+    fkSensor INT UNIQUE,
     dtEntrada DATETIME,
     dtSaida DATETIME,
     FOREIGN KEY (fkProduto) REFERENCES produto(idProduto),
     FOREIGN KEY (fkEstoque, fkEmpresa) REFERENCES estoque(idEstoque, fkEmpresa),
     FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor),
-    PRIMARY KEY (idLote, fkProduto, fkEstoque, fkEmpresa)
+    PRIMARY KEY (idLote, fkEstoque, fkEmpresa)
 );
 
 INSERT INTO estoque (idEstoque, tamanho, estoqueNome, fkEmpresa) VALUES
@@ -136,6 +136,13 @@ INSERT INTO registro (fkSensor, distancia, dtRegistro) VALUES
 (5, 30, '2025-12-02 14:04:00'),  
 (6, 45, '2025-12-02 14:05:00');
 
+INSERT INTO lote (idLote, fkProduto, fkEmpresa, fkEstoque, fkSensor) VALUES
+    (1, null, 1, 1, 1),
+    (2, null ,1, 1, 2),
+    (3, null, 1, 1, 3),
+    (1, null, 2, 1, 4),
+    (2, null, 2, 1, 5),
+    (3, null, 2, 1, 6);
 
 CREATE OR REPLACE VIEW vw_kpiProdutoVencido AS
 SELECT 
@@ -179,25 +186,18 @@ CREATE OR REPLACE VIEW vw_kpiEstoqueVazio AS
             JOIN
         sensor s ON s.idSensor = l.fkSensor
             JOIN
-        (SELECT 
-            fkSensor, MAX(dtRegistro) AS ultimoRegistro
-        FROM
-            registro
-        GROUP BY fkSensor) last_r ON last_r.fkSensor = s.idSensor
-            JOIN
         registro r ON r.fkSensor = s.idSensor
-            AND r.dtRegistro = last_r.ultimoRegistro
     ORDER BY r.distancia DESC
     LIMIT 1;
-
+    
 -- -----------------------------------------------------------------------
 CREATE OR REPLACE VIEW vw_kpiQtdLotesReposicao AS
     SELECT 
-        COUNT(DISTINCT l.fkEstoque) AS EstoquesQuePrecisamReposicao
+        COUNT(DISTINCT l.idLote) AS EstoquesQuePrecisamReposicao
     FROM
         lote l
             JOIN
-        estoque e ON e.idEstoque = l.fkEstoque
+        estoque e ON e.idEstoque = l.fkEstoque AND e.fkEmpresa = l.fkEmpresa
             JOIN
         empresa ON empresa.id = e.fkEmpresa
             JOIN
@@ -213,7 +213,5 @@ CREATE OR REPLACE VIEW vw_kpiQtdLotesReposicao AS
             AND r.dtRegistro = ult.ultimoRegistro
     WHERE
         r.distancia > (e.tamanho * 0.80);
-        -- OBS: COLOCAR WHERE empresa.id = ${}
-
-        -- KPI -  Precisa funcionar TASK - Gustavo Pietro 
+        
         
