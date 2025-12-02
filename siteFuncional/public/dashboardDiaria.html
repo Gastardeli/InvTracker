@@ -52,14 +52,8 @@
             <div id="dashboard_estoque">
                 <div class="select_esquerda">
                     <div class="kpi">
-                        <p class="titulo">Quantos lotes precisam de reabastecimento
-                            <span style="color: red">9
-                        </p>
-                        </span>
-                    </div>
-                    <div class="kpi">
-                        <p class="titulo">Estoque com maior necessidade de Reposição
-                            <span style="color: red" id="kpi2">
+                        <p class="titulo">Lotes para reabastecer <br>
+                            <span style="color: red" id="kpi1">
                         </p>
                         </span>
                     </div>
@@ -269,9 +263,32 @@
         }
     });
 
-    const kpi2 = document.getElementById("kpi2");
+    const kpi1 = document.getElementById("kpi1");
 
-    
+    fetch(`/dashDiaria/kpiQtdLotesReposicao/${sessionStorage.ID_EMPRESA}`)
+     .then(resposta => resposta.json())
+        .then(produto => {
+            var mensagem = ``;
+
+            if(produto.length > 1) {
+                for (var index = 0; index < produto.length; index++) {
+                    var atual = produto[index];
+                    var atualEstoque = atual.fkEstoque;
+                    var atualLote = atual.idLote;
+                    var atualProduto = atual.fkProduto;
+                    var atualEstoqueNome = atual.estoqueNome;
+
+                        mensagem +=`O ${atualEstoqueNome}: <br>`                    
+                    
+                }
+            }
+
+            kpi1.innerHTML = mensagem;
+        })
+.catch(erro => {
+            console.error('Erro na requisição:', erro);
+        });
+
 
     const kpi3 = document.getElementById("kpi3");
 
@@ -302,7 +319,7 @@
 
         function deletarRegistrar() {
             fetch(`/dashDiaria/deletarRegistro/${sessionStorage.ID_EMPRESA}`, {
-        method: "DELETE",
+        method: "PUT",
         headers: {
             "Content-Type": "application/json",
         },

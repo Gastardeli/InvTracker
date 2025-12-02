@@ -12,9 +12,36 @@ function kpiProdutoVencido(idEmpresa) {
     return database.executar(instrucao);
 }
 
-function kpiQtdLotesReposicao() {
+function kpiQtdLotesReposicao(idEmpresa) {
     var instrucao = `
-        SELECT * FROM vw_kpiQtdLotesReposicao;
+SELECT 
+    l.fkEstoque,
+    l.idLote,
+    l.fkProduto,
+    e.estoqueNome,
+    e.tamanho AS capacidadeEstoque,
+    r.distancia AS distanciaAtual
+        FROM
+    lote l
+        JOIN
+    estoque e ON e.idEstoque = l.fkEstoque AND e.fkEmpresa = l.fkEmpresa
+        JOIN
+    sensor s ON s.idSensor = l.fkSensor
+        JOIN
+    (SELECT 
+        fkSensor, MAX(dtRegistro) AS ultimoRegistro
+    FROM
+        registro
+    GROUP BY fkSensor) ult ON ult.fkSensor = s.idSensor
+        JOIN
+    registro r ON r.fkSensor = s.idSensor
+    AND r.dtRegistro = ult.ultimoRegistro
+        WHERE
+    e.fkEmpresa = ${idEmpresa}
+    AND 
+    r.distancia > (e.tamanho * 0.80)
+       ORDER BY 
+    r.distancia DESC;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -29,7 +56,9 @@ function kpiEstoqueVazio() {
 
 function deletarRegistro(idEmpresa) {
     var instrucao = `
-    DELETE FROM lote
+    UPDATE lote SET
+    fkProduto = null,
+    dtEntrada = null
     WHERE idLote = (
         SELECT idLote FROM (
             SELECT 
