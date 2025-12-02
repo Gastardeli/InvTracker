@@ -1,8 +1,6 @@
 CREATE DATABASE invtracker;
 USE invtracker;
 
-
-
 CREATE TABLE empresa(
     id INT PRIMARY KEY AUTO_INCREMENT,
     statusCliente VARCHAR(8) DEFAULT 'Ativo',
@@ -49,19 +47,6 @@ fkEmpresa INT,
 CONSTRAINT fkEmpresaEstoque
 FOREIGN KEY (fkEmpresa) REFERENCES empresa(id)
 );
-SELECT 
-    *
-FROM
-    estoque;
-INSERT INTO estoque (tamanho, estoque, fkEmpresa) VALUES 
-(5.50, 'Estoque Central - A1', 1),
-(2.00, 'Estoque Frios - A2', 1),
-(1.75, 'Estoque Secos - A3', 1);
-
-INSERT INTO estoque (tamanho, estoque, fkEmpresa) VALUES
-(6.00, 'Câmara Congelamento - S1', 2),
-(1.00, 'Estoque Embalagens - S2', 2),
-(3.50, 'Estoque Ingredientes - S3', 2);
 
 
 
@@ -74,6 +59,7 @@ CREATE TABLE produto (
     valorCompra DECIMAL(10 , 2 ),
     valorVenda DECIMAL(10 , 2 )
 );
+
 
 CREATE TABLE sensor (
 idSensor INT PRIMARY KEY AUTO_INCREMENT,
@@ -109,110 +95,125 @@ CREATE TABLE lote (
 );
 
 
-CREATE VIEW VW_DashboardDiaria AS
+INSERT INTO estoque (tamanho, estoque, fkEmpresa) VALUES
+(50.00, 'Estoque Central - A1', 1),
+(50.00, 'Estoque Frios - A2', 1),
+(50.00, 'Estoque Secos - A3', 1),
+(50.00, 'Câmara Congelamento - S1', 2),
+(50.00, 'Estoque Embalagens - S2', 2),
+(50.00, 'Estoque Ingredientes - S3', 2);
+    
+INSERT INTO produto (nomeProduto, dtFabricacao, dtValidade, fabricante, valorCompra, valorVenda) VALUES
+('Arroz Tipo 1 5kg', '2024-11-15', '2025-11-15', 'Tirol', 18.50, 28.00),
+('Feijão Carioca 1kg', '2024-11-20', '2025-08-20', 'Kicaldo', 6.40, 10.00),
+('Óleo de Soja 900ml', '2024-12-01', '2025-06-01', 'Soya', 5.20, 8.50);
 
-(SELECT 'kpi_reabastecimento' AS tipo,CONCAT(COUNT(*)) AS valor,'' AS valor2,'' AS valor3
-    FROM lote l JOIN sensor s ON s.idSensor = l.fkSensor JOIN registro r ON r.fkSensor = s.idSensor
-    JOIN estoque e ON e.idEstoque = l.fkEstoque)
-UNION ALL
-(
-    SELECT
-        'kpi_estoque_critico' AS tipo,
-        CONCAT(e.idEstoque) AS valor,
-        '' AS valor2,
-        '' AS valor3
-    FROM estoque e
-    JOIN lote l ON l.fkEstoque = e.idEstoque
-    JOIN sensor s ON s.idSensor = l.fkSensor
-    JOIN registro r ON r.fkSensor = s.idSensor
-    GROUP BY e.idEstoque
-    ORDER BY AVG(r.distancia) ASC 
-    LIMIT 1
-)
+INSERT INTO sensor (nSerie, statusSensor) VALUES
+	('SN-A1', 'Ativo'),
+	('SN-A2', 'Ativo'),
+	('SN-A3', 'Ativo'),
+	('SN-S1', 'Ativo'),
+	('SN-S2', 'Ativo'),
+	('SN-S3', 'Ativo');
+    
+INSERT INTO registro (fkSensor, distancia, dtRegistro) VALUES
+(1, 0.00, '2025-01-15 10:00:00'),
+(2, 0.00, '2025-01-15 10:05:00'),
+(3, 0.00, '2025-01-15 10:10:00'),
+(4, 0.00, '2025-01-15 10:15:00'),
+(5, 0.00, '2025-01-15 10:20:00'),
+(6, 0.00, '2025-01-15 10:25:00');
+    
+INSERT INTO registro (fkSensor, distancia, dtRegistro) VALUES
+(1, 5.00, '2025-01-15 10:00:00'),
+(2, 5.00, '2025-01-15 10:05:00'),
+(3, 5.00, '2025-01-15 10:10:00'),
+(4, 5.00, '2025-01-15 10:15:00'),
+(5, 5.00, '2025-01-15 10:20:00'),
+(6, 5.00, '2025-01-15 10:25:00');
 
-UNION ALL
+INSERT INTO registro (fkSensor, distancia, dtRegistro) VALUES
+(1, 41.00, '2025-12-02 14:00:00'),  
+(2, 41.00, '2025-12-02 14:01:00'), 
+(4, 42.50, '2025-12-02 14:02:00'),  
+(6, 45.00, '2025-12-02 14:03:00'); 
 
-(
-    SELECT
-        'kpi_vencimento' AS tipo,
-        CONCAT(l.fkProduto, '-', l.fkEstoque) AS valor,
-        CONCAT(e.idEstoque) AS valor2,
-        CONCAT(p.dtValidade) AS valor3
-    FROM lote l
-    JOIN produto p ON p.idProduto = l.fkProduto
-    JOIN estoque e ON e.idEstoque = l.fkEstoque
-    ORDER BY p.dtValidade ASC
-    LIMIT 1
-)
+INSERT INTO registro (fkSensor, distancia, dtRegistro) VALUES
+(1, 41.00, '2025-12-02 14:00:00'),
+(2, 41.00, '2025-12-02 14:01:00'),
+(3, 10.00, '2025-12-02 14:02:00'), 
+(4, 42.50, '2025-12-02 14:03:00'),
+(5, 30.00, '2025-12-02 14:04:00'),  
+(6, 45.00, '2025-12-02 14:05:00');
 
-UNION ALL
 
-(
-    SELECT
-        'grafico_criticos' AS tipo,
-        CONCAT(l.fkProduto, '-', l.fkEstoque) AS valor,
-        CONCAT(e.idEstoque) AS valor2,
-        CONCAT(r.distancia) AS valor3
-    FROM estoque e
-    JOIN lote l ON l.fkEstoque = e.idEstoque
-    JOIN sensor s ON s.idSensor = l.fkSensor
-    JOIN registro r ON r.fkSensor = s.idSensor
-);
+CREATE OR REPLACE VIEW vw_kpiProdutoVencido AS
+    SELECT 
+        idProduto,
+        nomeProduto,
+        dtValidade,
+        CASE
+            WHEN DATEDIFF(dtValidade, CURDATE()) <= 0 THEN 'Vencido'
+            ELSE DATEDIFF(dtValidade, CURDATE())
+        END AS diasParaVencer
+    FROM
+        produto
+    ORDER BY dtValidade ASC
+    LIMIT 1;
+    
+-- ------------------------------------------------------------------------------
 
-CREATE VIEW VW_DashboardEstoque AS 
+CREATE OR REPLACE VIEW vw_kpiEstoqueVazio AS
+    SELECT 
+        e.idEstoque,
+        e.estoque AS nomeEstoque,
+        emp.razao AS empresa,
+        e.tamanho AS capacidadeTotal,
+        r.distancia AS espacoVazio,
+        (e.tamanho - r.distancia) AS espacoOcupado,
+        ROUND((r.distancia / e.tamanho) * 100, 2) AS porcentagemVazio
+    FROM
+        lote l
+            JOIN
+        estoque e ON e.idEstoque = l.fkEstoque
+            JOIN
+        empresa emp ON emp.id = e.fkEmpresa
+            JOIN
+        sensor s ON s.idSensor = l.fkSensor
+            JOIN
+        (SELECT 
+            fkSensor, MAX(dtRegistro) AS ultimoRegistro
+        FROM
+            registro
+        GROUP BY fkSensor) last_r ON last_r.fkSensor = s.idSensor
+            JOIN
+        registro r ON r.fkSensor = s.idSensor
+            AND r.dtRegistro = last_r.ultimoRegistro
+    ORDER BY r.distancia DESC
+    LIMIT 1;
+    
+-- -----------------------------------------------------------------------
+CREATE OR REPLACE VIEW vw_kpiQtdLotesReposicao AS
+    SELECT 
+        COUNT(DISTINCT l.fkEstoque) AS EstoquesQuePrecisamReposicao
+    FROM
+        lote l
+            JOIN
+        estoque e ON e.idEstoque = l.fkEstoque
+            JOIN
+        empresa ON empresa.id = e.fkEmpresa
+            JOIN
+        sensor s ON s.idSensor = l.fkSensor
+            JOIN
+        (SELECT 
+            fkSensor, MAX(dtRegistro) AS ultimoRegistro
+        FROM
+            registro
+        GROUP BY fkSensor) ult ON ult.fkSensor = s.idSensor
+            JOIN
+        registro r ON r.fkSensor = s.idSensor
+            AND r.dtRegistro = ult.ultimoRegistro
+    WHERE
+        r.distancia > (e.tamanho * 0.80);
+        -- OBS: COLOCAR WHERE empresa.id = ${}
 
-(
-    SELECT
-        'grafico_ocupacao' AS tipo,
-        CONCAT(l.fkProduto, '-', l.fkEstoque) AS valor,
-        CONCAT(r.distancia) AS valor2,
-        '' AS valor3
-    FROM lote l
-    JOIN estoque e ON e.idEstoque = l.fkEstoque
-    JOIN sensor s ON s.idSensor = l.fkSensor
-    JOIN registro r ON r.fkSensor = s.idSensor
-)
-
-UNION ALL
-
-(
-    SELECT
-        'kpi_lote_critico' AS tipo,
-        CONCAT(l.fkProduto, '-', l.fkEstoque) AS valor,
-        CONCAT(r.distancia) AS valor2,
-        '' AS valor3
-    FROM lote l
-    JOIN estoque e ON e.idEstoque = l.fkEstoque
-    JOIN sensor s ON s.idSensor = l.fkSensor
-    JOIN registro r ON r.fkSensor = s.idSensor
-    ORDER BY r.distancia ASC
-    LIMIT 1
-)
-
-UNION ALL
-
-(
-    SELECT
-        'kpi_qtd_criticos' AS tipo,
-        CONCAT(COUNT(*)) AS valor,
-        '' AS valor2,
-        '' AS valor3
-    FROM lote l
-    JOIN estoque e ON e.idEstoque = l.fkEstoque
-    JOIN sensor s ON s.idSensor = l.fkSensor
-    JOIN registro r ON r.fkSensor = s.idSensor
-)
-
-UNION ALL
-
-(
-    SELECT
-        'grafico_criticos' AS tipo,
-        CONCAT(l.fkProduto, '-', l.fkEstoque) AS valor,
-        CONCAT(r.distancia) AS valor2,
-        '' AS valor3
-    FROM lote l
-    JOIN estoque e ON e.idEstoque = l.fkEstoque
-    JOIN sensor s ON s.idSensor = l.fkSensor
-    JOIN registro r ON r.fkSensor = s.idSensor
-);
