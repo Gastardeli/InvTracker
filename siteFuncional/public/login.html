@@ -146,15 +146,21 @@
                         sessionStorage.ID_USUARIO = json.id;
                         sessionStorage.ID_EMPRESA = json.id_empresa;
 
-
                         setTimeout(function () {
                             modal_login.innerHTML =
                                 `<span style="color:#E67C1C">Bem vindo(a)!</span>`;
                             modal_login_grande.style.display = "block";
 
-                            setTimeout(() => {
-                                window.location.href = "dashboardDiaria.html";
-                            }, "5000");
+                            if (sessionStorage.EMAIL_USUARIO.includes("@suporte.invtracker")) {
+                                setTimeout(() => {
+                                    window.location.href = "http://localhost:3000";
+                                }, "5000");
+                            }
+                            else {
+                                setTimeout(() => {
+                                    window.location.href = "dashboardDiaria.html";
+                                }, "5000");
+                            }
                         }, 1000); // apenas para exibir o loading
                     });
                 } else {
