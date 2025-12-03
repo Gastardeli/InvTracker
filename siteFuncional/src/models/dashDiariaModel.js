@@ -71,7 +71,38 @@ function deletarRegistro(idEmpresa) {
         ) AS DeleteRegistro
     );
     `;
-        console.log("Executando a instrução SQL: \n" + instrucao);
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function graficoLotesDefasados(idEmpresa) {
+    var instrucao = `
+        SELECT 
+            CONCAT('E', e.idEstoque, ' - L', l.idLote) AS identificacao,
+            ROUND(((e.tamanho - r.distancia) / e.tamanho) * 100, 2) AS taxa_ocupacao
+        FROM lote l
+        JOIN estoque e 
+            ON e.idEstoque = l.fkEstoque 
+            AND e.fkEmpresa = l.fkEmpresa
+        JOIN sensor s 
+            ON s.idSensor = l.fkSensor
+        JOIN (
+            -- Último registro de cada sensor
+            SELECT r1.*
+            FROM registro r1
+            JOIN (
+                SELECT fkSensor, MAX(dtRegistro) AS ultimo_registro
+                FROM registro
+                GROUP BY fkSensor
+            ) r2 
+            ON r1.fkSensor = r2.fkSensor 
+            AND r1.dtRegistro = r2.ultimo_registro
+        ) AS r
+        ON r.fkSensor = s.idSensor
+        WHERE l.fkEmpresa = ${idEmpresa}
+        ORDER BY e.idEstoque, l.idLote;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
@@ -79,6 +110,7 @@ module.exports = {
     kpiProdutoVencido,
     kpiQtdLotesReposicao,
     kpiEstoqueVazio,
-    deletarRegistro
+    deletarRegistro,
+    graficoLotesDefasados
 };
 

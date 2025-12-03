@@ -36,10 +36,24 @@ function deletarRegistro(req, res) {
     })
 }
 
+function graficoLotesDefasados(req, res) {
+    const idEmpresa = req.params.idEmpresa;
+
+    dashDiariaModel.graficoLotesDefasados(idEmpresa)
+        .then(resultado => {
+            res.status(200).json({ lista: resultado });
+        })
+        .catch(erro => {
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+
 
 module.exports = {
     kpiEstoqueVazio,
     kpiQtdLotesReposicao,
     kpiProdutoVencido,
-    deletarRegistro
+    deletarRegistro,
+    graficoLotesDefasados
 }

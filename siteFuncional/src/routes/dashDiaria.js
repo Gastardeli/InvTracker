@@ -19,5 +19,11 @@ router.get("/kpiQtdLotesReposicao/:idEmpresa", function (req, res) {
 
 });
 
+router.get("/graficoLotesDefasados/:idEmpresa", function (req, res) {
+    dashDiariaController.graficoLotesDefasados(req, res);
+})
+
+
+
 
 module.exports = router;
