@@ -10,6 +10,9 @@
     <link rel="icon" href="assets/icon/icon.png" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1"></script>
+
+    <script src="js/dashEstoquejs.js"></script>
+
 </head>
 
 <body>
@@ -34,8 +37,9 @@
                     <p>Cadastrar Estoque</p>
                 </a>
             </div>
-             <div id="icon_help" class="iconHelpDiv">
-                <a href="https://invtracker.atlassian.net/servicedesk/customer/portals" ><span>Central de Atendimento</span></a>
+            <div id="icon_help" class="iconHelpDiv">
+                <a href="https://invtracker.atlassian.net/servicedesk/customer/portals"><span>Central de
+                        Atendimento</span></a>
             </div>
             <div class="footer">
                 <img src="assets/icon/iconUser.png" alt="">
@@ -44,7 +48,7 @@
                     <a href="index.html"><button>Sair</button></a>
                 </div>
             </div>
-             
+
         </aside>
         <div class="container_direita2">
             <div id="dashboard_estoque">
@@ -52,9 +56,10 @@
                     <div class="kpi">
                         <div class="titulo">
                             <p>Selecione seu estoque</p>
-                            <select>
-                                <option value="estoque1">Estoque 1</option>
-                                <option value="#" disabled>Selecione uma Opção</option>
+                            <select id="selectEstoque" onchange="atualizarGraficos()">
+                                <option value="#" disabled selected>Selecione uma Opção</option>
+                                <option value="1">Estoque 1</option>
+                                <option value="2">Estoque 2</option>
                             </select>
                         </div>
                     </div>
@@ -75,199 +80,12 @@
                 </div>
             </div>
         </div>
-
-        <script src="script/scriptDashboardEstoque.js"></script>
 </body>
 
 
 </html>
 
 <script>
-    const nomeUser = document.getElementById("nomeUsuario");
-    nomeUser.innerHTML = `Olá! ${sessionStorage.NOME_USUARIO}`
-
-    const dashboardEstoque = document.getElementById('dashboardEstoque');
-
-    const dashboardLote1 = document.getElementById('dashboard1');
-
-    const dashboardLote2 = document.getElementById('dashboard2');
-
-    const dashboardLote3 = document.getElementById('dashboard3');
-
-    const dashboardLote4 = document.getElementById('dashboard4');
-
-    new Chart(dashboardLote1, {
-        type: 'bar',
-        data: {
-            labels: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10'],
-            datasets: [{
-                label: 'Ocupação (em porcentagem)',
-                backgroundColor: '#ff8c00',
-                borderColor: '#ff8c00',
-                data: [100, 10, 68, 75, 5, 89, 75, 60, 87, 70, 60, 80, 60],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Ocupação dos lotes',
-                    font: {
-                        size: 20,
-                        weight: 'bold'
-                    },
-                    color: '#000'
-                },
-                legend: {
-                    display: true,
-                    position: 'bottom'
-                },
-                annotation: {
-                    annotations: {
-                        linhaHorizontal: {
-                            type: 'line',
-                            yMin: 20,
-                            yMax: 20,
-                            borderColor: 'red',
-                            borderWidth: 2,
-                            borderDash: [5, 5],
-                            label: {
-                                display: true,
-                                content: 'ZONA DE RISCO',
-                                position: 'start'
-                            }
-                        },
-                        linhaHorizonta2: {
-                            type: 'line',
-                            yMin: 99,
-                            yMax: 99,
-                            borderColor: 'green',
-                            borderWidth: 2,
-                            borderDash: [5, 5],
-                            label: {
-                                display: true,
-                                content: 'LOTE CHEIO',
-                                position: 'start'
-                            }
-                        }
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Unidade do lote',
-                        font: {
-                            size: 12,
-                            weight: 'bold'
-                        },
-                        color: '#000'
-                    }
-                },
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Ocupação (%)',
-                        font: {
-                            size: 12,
-                            weight: 'bold'
-                        },
-                        color: '#000'
-                    }
-                }
-            }
-        }
-    });
-
-    new Chart(dashboardLote2, {
-        type: 'bar',
-        data: {
-            labels: ['02', '05'],
-            datasets: [{
-                label: 'Ocupação (em porcentagem)',
-                backgroundColor: '#ff8c00',
-                borderColor: '#ff8c00',
-                data: [10, 5],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Lotes em estado crítico',
-                    font: {
-                        size: 20,
-                        weight: 'bold'
-                    },
-                    color: '#000'
-                },
-                legend: {
-                    display: true,
-                    position: 'bottom'
-                },
-                annotation: {
-                    annotations: {
-                        linhaHorizontal: {
-                            type: 'line',
-                            yMin: 20,
-                            yMax: 20,
-                            borderColor: 'red',
-                            borderWidth: 2,
-                            borderDash: [5, 5],
-                            label: {
-                                display: true,
-                                content: 'ZONA DE RISCO',
-                                position: 'start'
-                            }
-                        },
-                        linhaHorizonta2: {
-                            type: 'line',
-                            yMin: 99,
-                            yMax: 99,
-                            borderColor: 'green',
-                            borderWidth: 2,
-                            borderDash: [5, 5],
-                            label: {
-                                display: true,
-                                content: 'LOTE CHEIO',
-                                position: 'start'
-                            }
-                        }
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Unidade do lote',
-                        font: {
-                            size: 12,
-                            weight: 'bold'
-                        },
-                        color: '#000'
-                    }
-                },
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Ocupação (%)',
-                        font: {
-                            size: 12,
-                            weight: 'bold'
-                        },
-                        color: '#000'
-                    }
-                }
-            }
-        }
-    });
-
 
     function redirectEstoque() {
         dashboard_diaria.style.display = "none";
@@ -278,15 +96,4 @@
         dashboard_diaria.style.display = "block";
         dashboard_estoque.style.display = "none";
     }
-
-
-
-
-
-
-
-
-
-
-
 </script>
