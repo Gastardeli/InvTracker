@@ -55,20 +55,21 @@ function kpiEstoqueVazio() {
 
 function deletarRegistro(idEmpresa) {
     var instrucao = `
-    UPDATE lote SET
-    fkProduto = null,
-    dtEntrada = null
+    UPDATE lote
+    SET 
+    fkProduto = NULL,
+    dtEntrada = NULL
     WHERE idLote = (
-        SELECT idLote FROM (
-            SELECT 
-                l.idLote
-            FROM lote l
-            JOIN produto p ON l.fkProduto = p.idProduto
-            WHERE l.fkEmpresa = ${idEmpresa}
-            AND 
-        (SELECT MIN(dtValidade) FROM vw_kpiProdutoVencido)
-        ) AS DeleteRegistro
-    );
+    SELECT idLote FROM (
+        SELECT 
+            l.idLote
+        FROM lote l
+        JOIN produto p ON p.idProduto = l.fkProduto
+        WHERE l.fkEmpresa = ${idEmpresa}
+        ORDER BY p.dtValidade ASC 
+        LIMIT 1
+    ) AS T
+);
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

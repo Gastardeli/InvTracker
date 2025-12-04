@@ -75,20 +75,7 @@ function graficoOcupacaoLotes(idEstoque, idEmpresa, res) {
   return database.executar(instrucaoSql);
 }
 
-function loteComMaiorNecessidade(idEmpresa) {
-  var instrucaoSql = `
-  `
-
-}
-
-function qtdeLotesReabastecimento(idEmpresa) {
-  var instrucaoSql = `
-  `
-}
-
 module.exports = {
   graficoDoisEstadoCritico,
-  graficoOcupacaoLotes,
-  loteComMaiorNecessidade,
-  qtdeLotesReabastecimento
+  graficoOcupacaoLotes
 };

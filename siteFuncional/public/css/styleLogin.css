@@ -1,6 +1,5 @@
-/*login*/
 .login-container {
-    height: 90vh;
+    height: 100vh;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -8,7 +7,6 @@
     overflow: hidden;
     padding: 0 5%;
     background-image: url('../assets/imgs/paginaFundoLogin&Cadastro.png');
-    /* imagem temporaria*/
     background-size: cover;
     background-position: center;
 }

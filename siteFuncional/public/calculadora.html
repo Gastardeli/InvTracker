@@ -12,21 +12,23 @@
 
 </head>
 
-<body>
-
-  <div class="header">
-    <div class="container">
-      <img src="assets/imgs/logo.png">
-      <h1 class="title">InvTracker</h1>
-      <div class="navbar">
-        <a href="index.html">Inicio </a>
-        <a class="now" href="#">Aplicações </a>
-        <a href="login.html">Login </a>
-        <a href="cadastro.html">Cadastro </a>
-        <a href="dashboard.html" style="display: none;" id="dashHeader">Dashboard</a>
-      </div>
+<div class="header">
+  <div class="container">
+    <img src="assets/imgs/logo.png">
+    <h1 class="title">InvTracker</h1>
+    <div class="navbar">
+      <a href="index.html">Inicio </a>
+      <a class="agora" href="#">Aplicações </a>
+      <a href="login.html">Login </a>
+      <a href="cadastro.html">Cadastro </a>
+      <a href="dashboard.html" style="display: none;" id="dashHeader">Dashboard</a>
     </div>
   </div>
+</div>
+
+<body>
+
+
 
   <div class="main">
 
@@ -88,26 +90,6 @@
     </div>
   </div>
 
-  <!-- MODAL EMPRESA -->
-  <div id="modalEmpresa" class="modal">
-    <div class="modal-content">
-      <h2>Explicação Detalhada - Empresa</h2>
-      <div id="div_resultado"></div>
-      <button onclick="modalEmpresaFechar()">Fechar</button>
-    </div>
-  </div>
-
-  <!-- MODAL PRODUTO -->
-  <div id="modalProduto" class="modal">
-    <div class="modal-content">
-      <h2>Explicação Detalhada - Produto</h2>
-      <div id="div_resultado_produto"></div>
-      <button onclick="modalProdutoFechar()">Fechar</button>
-    </div>
-  </div>
-
-  </div>
-
   <div class="footer">
     <div class="container">
       <div class="boxes">
@@ -129,6 +111,24 @@
   </div>
 
 </body>
+
+<!-- MODAL EMPRESA -->
+<div id="modalEmpresa" class="modal">
+  <div class="modal-content">
+    <h2>Explicação Detalhada - Empresa</h2>
+    <div id="div_resultado"></div>
+    <button onclick="modalEmpresaFechar()">Fechar</button>
+  </div>
+</div>
+
+<!-- MODAL PRODUTO -->
+<div id="modalProduto" class="modal">
+  <div class="modal-content">
+    <h2>Explicação Detalhada - Produto</h2>
+    <div id="div_resultado_produto"></div>
+    <button onclick="modalProdutoFechar()">Fechar</button>
+  </div>
+</div>
 
 </html>
 <script>
@@ -241,10 +241,10 @@
 
 
   function modalEmpresa() {
-    document.getElementById('modalEmpresa').style.display = 'block';
+    document.getElementById('modalEmpresa').style.display = 'flex';
   }
   function modalProduto() {
-    document.getElementById('modalProduto').style.display = 'block';
+    document.getElementById('modalProduto').style.display = 'flex';
   }
 
   function modalProdutoFechar() {

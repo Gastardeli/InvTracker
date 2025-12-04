@@ -6,15 +6,13 @@
 body {
     margin: 0;
     font-family: "Poppins", sans-serif;
-    color: #1e293b; /* Texto padrão escuro */
-    background-color: #f1f5f9; /* Fundo geral cinza claro */
+    color: #1e293b;
+    background-color: #f1f5f9;
 }
-
-/* ÍNICIO DO HEADER UNIVERSAL */
 
 .header {
     border-bottom: 8px solid #E67C1C;
-    background-color: #ffffff; /* Branco limpo */
+    background-color: #ffffff;
 }
 
 .header .container {
@@ -66,14 +64,11 @@ body {
     color: #E67C1C;
 }
 
-.now {
+.agora {
     font-weight: bolder;
-    color: #E67C1C !important;
+    color: #E67C1C;
 }
 
-/*FIM DO HEADER UNIVERSAL*/
-
-/* ÍNICIO DO FOOTER UNIVERSAL */
 .footer {
     height: 10%;
     width: 100%;
@@ -124,14 +119,6 @@ body {
     color: #1e293b;
 }
 
-/* FIM DO FOOTER UNIVERSAL */
-
-
-/* ÍNICIO DA REPONSIVIDADE BÁSICA */
-
-@media screen and (max-width: 1000px) {
-
-
     main .sobre .container .porcentagens .todasaspercs {
         display: flex;
         width: 100%;
@@ -168,11 +155,6 @@ body {
 
     .card-Cadastro {
         margin-right: 0px;
-        margin-top: -350px;
-    }
-
-    .body-cadastrar {
-        height: 200vh;
     }
 
     .cad_pai {
@@ -181,21 +163,13 @@ body {
         flex-direction: column;
     }
 
-}
-
-/* FIM DA RESPONSIVIDADE BÁSICA */
-
-
-
-/* INICIO DA ESTILIZAÇÃO DO ASIDE DAS DASHBOARDS (NOVO ESTILO NAVY) */
-
 .container_main {
     width: 100%;
     display: flex;
 }
 
 .container_main aside {
-    background-color: #1e293b; /* Azul Escuro (Navy) */
+    background-color: #1e293b;
     width: 25%;
     display: flex;
     flex-direction: column;
@@ -216,12 +190,12 @@ body {
     width: 100vh;
     margin-right: 10px;
     font-size: 30px;
-    color: #f8fafc; /* Texto Branco */
+    color: #f8fafc;
 }
 
 .container_main aside header img {
     width: 100px;
-    filter: brightness(0) invert(1); /* Ícone branco */
+    filter: brightness(0) invert(1);
 }
 
 .container_main aside .body {
@@ -235,7 +209,7 @@ body {
     font-size: 30px;
     cursor: pointer;
     text-decoration: none;
-    color: #94a3b8; /* Cinza azulado (inativo) */
+    color: #94a3b8;
     transition: 0.3s;
 }
 
@@ -244,11 +218,10 @@ body {
 }
 
 .container_main aside .body p:hover {
-    border-bottom: 2px solid #E67C1C; /* Laranja */
+    border-bottom: 2px solid #E67C1C;
     color: #fff;
 }
 
-/* Estado ativo (pode precisar de classe no HTML, mas estilizo o ID click se existir) */
 .container_main aside .body p#click {
     color: #E67C1C; 
     font-weight: bold;
@@ -267,7 +240,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 30px;
-    background-color: #1a2433; /* Levemente mais escuro */
+    background-color: #1a2433;
 }
 
 .container_main aside .footer img {
@@ -307,5 +280,3 @@ body {
     text-decoration: none;
     color: #fff;
 }
-
-/* FIM DA ESTILIZAÇÃO DO ASIDE DAS DASHBOARDS */

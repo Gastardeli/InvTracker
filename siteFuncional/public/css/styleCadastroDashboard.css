@@ -59,7 +59,7 @@
     transition: 0.3s;
 }
 
-.box_cadDash input:focus {
+.box_cadDash input:hover {
     border: 2px solid #E67C1C;
     background-color: #fff;
 }
@@ -79,9 +79,6 @@
     font-size: 18px;
     color: #334155;
     outline: none;
-}
-
-.box_cadDash select:focus {
     border: 2px solid #E67C1C;
 }
 
@@ -94,13 +91,16 @@
 }
 
 .box_cadDash button {
-    background-color: #E67C1C;
-    color: white;
+    background-color: #fff;
     padding: 10px 25px;
     border: none;
+    color: #E67C1C;
+    font-weight: bolder;
+    font-size: 18px;
     border-radius: 10px;
     margin-top: 20px;
     cursor: pointer;
+    border: 2px solid #E67C1C;
     margin-bottom: 20px;
     font-weight: bold;
     font-size: 16px;
@@ -108,7 +108,8 @@
 }
 
 .box_cadDash button:hover {
-    background-color: #c0630f;
+    background-color: #E67C1C;
+    color: #fff;
 }
 
 .container_modal_cadProd {

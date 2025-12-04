@@ -19,29 +19,7 @@ function graficoOcupacaoLotes(idEstoque, idEmpresa, res) {
     });
 }
 
-function loteComMaiorNecessidade(req, res) {
-    const idEmpresa = req.params.idEmpresa;
-    dashDiariaModelModel.loteComMaiorNecessidade(idEmpresa).then(function (resultado) {
-        res.status(200).json({ graficoEstoque: resultado });
-    }).catch(function (erro) {
-        console.error("Erro no controller:", erro);
-        res.status(500).json({ error: erro.sqlMessage || erro.message });
-    });
-}
-
-function qtdeLotesReabastecimento(req, res) {
-    const idEmpresa = req.params.idEmpresa;
-    dashDiariaModelModel.qtdeLotesReabastecimento(idEmpresa).then(function (resultado) {
-        res.status(200).json({ graficoEstoque: resultado });
-    }).catch(function (erro) {
-        console.error("Erro no controller:", erro);
-        res.status(500).json({ error: erro.sqlMessage || erro.message });
-    });
-}
-
 module.exports = {
     graficoDoisEstadoCritico,
-    graficoOcupacaoLotes,
-    loteComMaiorNecessidade,
-    qtdeLotesReabastecimento
+    graficoOcupacaoLotes
 };

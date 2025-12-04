@@ -30,6 +30,35 @@ function obterDadosGrafico1(idEstoque, idEmpresa) {
         })
         .then(data => {
             var arrayProdutos = data.graficoEstoque;
+            console.log(arrayProdutos);
+
+            const kpi2 = document.getElementById("kpi2");
+
+            var mensagem2 = ``;
+
+            var qtde = 0;
+
+            for (var index = 0; index < arrayProdutos.length; index++) {
+                var atual = arrayProdutos[index];
+
+                if (Number(atual.percentualOcupado) < 20) {
+                    qtde++;
+                    mensagem2 += `Produto: ${atual.nomeProduto} | Lote: ${atual.idLote} <br>`
+                }
+
+            }
+
+            mensagem2 += `<br> Sendo assim `
+
+            if (qtde > 1) {
+                mensagem2 += `${qtde} lotes precisam de reposição.`
+            } else if (qtde > 0) {
+                mensagem2 += `${qtde} lote precisa de reposição.`
+            } else {
+                mensagem2 = `<br> Nenhum lote precisa de reposição!`
+            }
+
+            kpi2.innerHTML = mensagem2;
 
             console.log("Dados para gráfico 1 (críticos):", arrayProdutos);
 
@@ -49,6 +78,27 @@ function obterDadosGrafico2(idEstoque, idEmpresa) {
         })
         .then(data => {
             var arrayProdutos = data.graficoEstoque;
+
+            const kpi1 = document.getElementById("kpi1");
+
+            var mensagem1 = ``;
+
+            var lote = Infinity;
+            var name = ``;
+            var min = Infinity;
+
+            for (var index = 0; index < arrayProdutos.length; index++) {
+                var atual = arrayProdutos[index];
+
+                if (Number(atual.percentualOcupado) < min) {
+                    lote = atual.idLote;
+                    name = atual.nomeProduto;
+                }
+            }
+
+            mensagem1 = `Produto: ${name} | Lote: ${lote} <br> <br> É o lote que mais precisa de reabastecimento no momento!`
+
+            kpi1.innerHTML = mensagem1;
 
             console.log("Dados para gráfico 2 (ocupação):", arrayProdutos);
 

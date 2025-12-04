@@ -20,12 +20,4 @@ router.get("/graficoOcupacaoLotes/:idEstoque/:idEmpresa", function (req, res) {
   estoqueController.graficoOcupacaoLotes(idEstoque, idEmpresa, res);
 })
 
-router.get("/loteComMaiorNecessidade/:idEmpresa", function (req, res) {
-  estoqueController.loteComMaiorNecessidade(req, res);
-})
-
-router.get("/qtdeLotesReabastecimento/:idEmpresa", function (req, res) {
-  estoqueController.qtdeLotesReabastecimento(req, res);
-})
-
 module.exports = router;

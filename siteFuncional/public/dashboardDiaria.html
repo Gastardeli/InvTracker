@@ -52,7 +52,7 @@
             <div id="dashboard_estoque">
                 <div class="select_esquerda">
                     <div class="kpi">
-                        <p class="titulo">Lotes para reabastecer <br>
+                        <p class="titulo" style="height: auto; width: auto;">Lotes para reabastecer <br>
                             <span style="color: red" id="kpi1">
                         </p>
                         </span>
@@ -89,17 +89,19 @@
         .then(produto => {
             var mensagem = ``;
 
-            if (produto.length > 1) {
-                for (var index = 0; index < produto.length; index++) {
-                    var atual = produto[index];
-                    var atualEstoque = atual.fkEstoque;
-                    var atualLote = atual.idLote;
-                    var atualProduto = atual.fkProduto;
-                    var atualEstoqueNome = atual.estoqueNome;
+            if (produto.length == 0) {
+                mensagem = `Não há nenhum lote para Reabastecer.`
+            }
 
-                    mensagem += `Estoque ${atualEstoque} - Lote ${atualLote} <br>`
+            for (var index = 0; index < produto.length; index++) {
+                var atual = produto[index];
+                var atualEstoque = atual.fkEstoque;
+                var atualLote = atual.idLote;
+                var atualProduto = atual.fkProduto;
+                var atualEstoqueNome = atual.estoqueNome;
 
-                }
+                mensagem += `Estoque ${atualEstoque} - Lote ${atualLote} <br>`
+
             }
 
             kpi1.innerHTML = mensagem;
@@ -117,19 +119,21 @@
             console.log(produto);
             if (produto.length == 0) {
                 kpi3.innerHTML = `Não há nenhum produto cadastrado.`
-            }
-            var data = produto[0].dtValidade;
-            var dataConvertida = new Date(data);
-            var venceu = produto[0].diasParaVencer
-            var dataFormatada = dataConvertida.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
-
-            if (venceu == 'Vencido') {
-                venceu = `<span style="color: red; font-weight: bold">${produto[0].diasParaVencer}!</span>`
             } else {
-                venceu = `<span style="color: blue; font-weight: bold">Faltam ${produto[0].diasParaVencer} dias para vencer</span>`
+                var data = produto[0].dtValidade;
+                var dataConvertida = new Date(data);
+                var venceu = produto[0].diasParaVencer
+                var dataFormatada = dataConvertida.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+
+                if (venceu == 'Vencido') {
+                    venceu = `<span style="color: red; font-weight: bold">${produto[0].diasParaVencer}!</span>`
+                } else {
+                    venceu = `<span style="color: blue; font-weight: bold">Faltam ${produto[0].diasParaVencer} dias para vencer</span>`
+                }
+
+                kpi3.innerHTML = `${produto[0].nomeProduto} <br> Validade ${dataFormatada} <br> Estoque: ${produto[0].idEstoque} <br> Lote: ${produto[0].idLote} <br> ${venceu}`
             }
 
-            kpi3.innerHTML = `${produto[0].nomeProduto} <br> Validade ${dataFormatada} <br> Estoque: ${produto[0].idEstoque} <br> Lote: ${produto[0].idLote} <br> ${venceu}`
 
 
         })

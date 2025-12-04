@@ -89,7 +89,7 @@
                     <input id="input_compraLote" placeholder="R$ 10.000" type="number">
                     <b>Valor venda lote</b>
                     <input id="input_vendaLote" placeholder="R$ 25.000" type="number">
-                    <button onclick="cadastrarProduto()"><b>Cadastrar Produto</b></button>
+                    <button onclick="cadastrarProduto()">Atualizar Produto</button>
 
                 </div>
             </div>
@@ -165,38 +165,6 @@
             return false;
         }
     }
-    // Listando empresas cadastradas
-    /* function listar() {
-         fetch("/empresas/listar", {
-             method: "GET",
-         })
-             .then(function (resposta) {
-                 resposta.json().then((empresas) => {
-                     empresas.forEach((empresa) => {
-                         listaEmpresasCadastradas.push(empresa);
- 
-                         console.log("listaEmpresasCadastradas");
-                         console.log(listaEmpresasCadastradas[0].codigo_ativacao);
-                     });
-                 });
-             })
-             .catch(function (resposta) {
-                 console.log(`#ERRO: ${resposta}`);
-             });
-     }*/
-
-    // Verificando se o código de ativação é de alguma empresa cadastrada
-    /* for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
-         if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
-             idEmpresaVincular = listaEmpresasCadastradas[i].id;
-             console.log("Código de ativação válido.");
-             break;
-         } else {
-             modal_cadastro.innerHTML = "Código de empresa inválido";
-             modal_cadastro_grande.style.display = 'block';
-
-         }
-     }*/
 
     function sumirMensagem() {
         modal_cadastro_grande.style.display = 'none';

@@ -6,7 +6,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #f1f5f9; /* Cinza Claro */
+    background-color: #f1f5f9;
 }
 
 .containerDashboard b {
@@ -14,16 +14,15 @@
     color: #1e293b;
 }
 
-/* CARDS BRANCOS PADRONIZADOS */
 .RandomBox {
     display: flex;
     height: 100px;
     width: 500px;
     flex-direction: column;
-    border: 1px solid #e2e8f0; /* Borda sutil */
+    border: 1px solid #e2e8f0;
     border-radius: 10px;
     margin: 5px;
-    background-color: #ffffff; /* Fundo branco */
+    background-color: #ffffff;
     justify-content: center;
     align-items: center;
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
@@ -69,7 +68,7 @@
     display: flex;
     height: 150px;
     flex-direction: column;
-    border: 2px solid #E67C1C; /* Destaque Laranja */
+    border: 2px solid #E67C1C;
     border-radius: 10px;
     margin: 5px;
     align-items: center;

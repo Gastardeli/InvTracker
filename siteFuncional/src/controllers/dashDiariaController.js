@@ -3,7 +3,6 @@ var dashDiariaModel = require("../models/dashDiariaModel");
 function kpiQtdLotesReposicao(req, res) {
     var idEmpresa = req.params.idEmpresa;
     dashDiariaModel.kpiQtdLotesReposicao(idEmpresa).then(function (resultado) {
-        // precisamos informar que o resultado voltará para o front-end como uma resposta em json
         res.status(200).json(resultado);
     }).catch(function (erro) {
         res.status(500).json(erro.sqlMessage);
@@ -12,7 +11,6 @@ function kpiQtdLotesReposicao(req, res) {
 function kpiProdutoVencido(req, res) {
     var idEmpresa = req.params.idEmpresa;
     dashDiariaModel.kpiProdutoVencido(idEmpresa).then(function (resultado) {
-        // precisamos informar que o resultado voltará para o front-end como uma resposta em json
         res.status(200).json(resultado);
     }).catch(function (erro) {
         res.status(500).json(erro.sqlMessage);
@@ -20,7 +18,6 @@ function kpiProdutoVencido(req, res) {
 }
 function kpiEstoqueVazio(req, res) {
     dashDiariaModel.kpiEstoqueVazio().then(function (resultado) {
-        // precisamos informar que o resultado voltará para o front-end como uma resposta em json
         res.status(200).json(resultado);
     }).catch(function (erro) {
         res.status(500).json(erro.sqlMessage);
@@ -29,8 +26,8 @@ function kpiEstoqueVazio(req, res) {
 
 function deletarRegistro(req, res) {
     var idEmpresa = req.params.idEmpresa;
-    dashDiariaModel.deletarRegistro(idEmpresa).then(function (resultado){
-         res.status(200).json(resultado);
+    dashDiariaModel.deletarRegistro(idEmpresa).then(function (resultado) {
+        res.status(200).json(resultado);
     }).catch(function (erro) {
         res.status(500).json(erro.sqlMessage);
     })

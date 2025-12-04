@@ -1,280 +1,465 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-/* Parte 1 */
+body {
+    height: 100%;
+    color: #0d131f;
+    font-weight: 500;
+}
 
+body {
+    font-family: "Poppins", "Inter", sans-serif;
+    background-color: #e2e8f0;
+    color: #1e293b;
+    line-height: 1.45;
+    letter-spacing: 0.4px;
+}
+
+main * {
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.container {
+    width: calc(100% - 40px);
+    margin: 0 auto;
+}
+
+.header {
+    border-bottom: 8px solid #E67C1C;
+    background-color: #ffffff;
+}
+
+.header .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+
+.header .container img {
+    width: 5%;
+}
+
+.title {
+    font-weight: bolder;
+    font-size: 20px;
+    color: #1e293b;
+}
+
+.header .container .navbar {
+    display: flex;
+    width: 80%;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.header .container .container {
+    display: flex;
+    width: 500px;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.navbar a {
+    outline: none;
+    text-decoration: none;
+    color: #1e293b;
+    marker: none;
+    transition: 0.3s;
+}
+
+.navbar a:hover {
+    color: #E67C1C;
+}
+
+.agora {
+    font-weight: bolder;
+    color: #E67C1C;
+}
+
+.footer {
+    height: 10%;
+    width: 100%;
+    background-color: #ffffff;
+    border-top: 1px solid #e2e8f0;
+}
+
+.footer .container {
+    height: 150px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer .container .boxes {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.box {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.box img {
+    width: 20%;
+    margin-bottom: 0px;
+}
+
+.box span {
+    font-size: small;
+    align-self: center;
+    margin-top: 2px;
+    color: #64748b;
+}
+
+.box h4 {
+    margin: 0;
+    color: #1e293b;
+}
 
 main {
     width: 100%;
+    display: block;
 }
 
 main .introducao {
     width: 100%;
-    height: 100%;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+    background:
+        linear-gradient(90deg, rgba(15, 23, 42, 0.92) 0%, rgba(15, 23, 42, 0.35) 60%),
+        url('../assets/imgs/funCaixaIndex.png') center/cover no-repeat;
 }
 
 main .introducao .container {
-   
-    width: 100%;
-    height: 500px;
-    background-size: cover;
-    background-repeat: no-repeat;
     display: flex;
-    flex-direction: column;
-    background: linear-gradient(to right, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.3)),
-              url('../assets/imgs/funCaixaIndex.png') center/cover no-repeat;
-
-}
-
-main .introducao .container .titulo {
-    width: 700px;
-    color: rgb(255, 255, 255);
-    font-weight: 700;
-    font-size: 45px;
-
-}
-
-main .introducao .container .div_opacidade {
+    align-items: center;
+    gap: 24px;
     width: 100%;
-    height: 100%;
-    background-color: #000000b6;
-    padding: 50px 100px;
-    flex-direction: row;
-    display: flex;
-  
-    
-    
+    max-width: 1200px;
+    padding: 40px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.0));
 }
-.texto_subtitulo p{
-  font-family: "Poppins", "Inter", sans-serif;
-  font-size: 40px;
-  margin: 0;
-  color: white;
-  
 
+main .introducao .div_opacidade {
+    width: 50%;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 28px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    border-radius: 14px;
+    flex-wrap: wrap;
 }
+
+.img_banner {
+    width: 96px;
+    height: 96px;
+    object-fit: contain;
+    flex: 0 0 96px;
+    border-radius: 10px;
+    background: transparent;
+}
+
 .titulo_banner p {
- font-family: "Poppins", "Inter", sans-serif;
-  font-size: 40px;
-  margin: 0;
-  color: white;
-
-
-}
-.img_banner{
-   width: 100px;
-   height: 100px;
-    margin-bottom: 10px;
+    font-size: 32px;
+    margin: 0 0 6px 0;
+    color: #fff;
+    line-height: 1.05;
+    font-weight: 700;
 }
 
+.texto_subtitulo p {
+    font-size: 18px;
+    margin: 0;
+    color: #e6eefc;
+    font-weight: 400;
+}
 
 main .introducao .container .texto {
-    color: rgb(255, 255, 255);
+    color: #fff;
     font-weight: 300;
-    font-size: 35px;
+    font-size: 18px;
     width: 70%;
-
+    max-width: 700px;
 }
 
-/* Parte 2 */
 main .sobre {
     width: 100%;
-    height: auto;
-    background-color: white;
-    padding: 50px 100px;
+    padding: 50px 0;
+    background-color: #e2e8f0;
 }
 
 main .sobre .container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-}
-
-main .sobre .container .parte1 {
-    display: flex;
-    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 0 20px;
 }
 
 main .sobre .container .parte1 .titulo {
-    font-size: 50px;
-    font-weight: bolder;
-    margin-bottom: 10px;
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 6px;
+    color: #0f172a;
 }
 
 main .sobre .container .parte1 .texto {
-    font-size: 30px;
+    font-size: 16px;
+    color: #1e293b;
     text-align: justify;
 }
 
 main .sobre .container .box {
-    border-radius: 10px;
-    margin-top: 5%;
-    padding: 20px 60px;
-    text-align: justify;
+    border-radius: 12px;
+    margin-top: 20px;
+    padding: 22px;
     display: flex;
+    flex-direction: column;
     width: 100%;
-    background-color: rgba(128, 128, 128, 0.658);
-    color: #000;
-    align-items: flex-end;
+    background-color: rgba(128, 128, 128, 0.06);
+    color: #0b1220;
 }
 
 main .sobre .container .box p {
-    font-size: 35px;
+    font-size: 15.5px;
+    line-height: 1.6;
 }
 
 main .sobre .container .box button {
-    background-color: #E67C1C;
+    align-self: flex-end;
+    background: #E67C1C;
     color: #fff;
-    padding: 10px 20px;
+    padding: 10px 18px;
     border-radius: 20px;
     border: 0;
-    margin-right: 100px;
+    cursor: pointer;
+    margin-top: 12px;
 }
 
-/* Parte 3 */
 main .sobre .container .porcentagens {
-    border-radius: 10px;
-    margin-top: 5%;
+    border-radius: 12px;
+    margin-top: 20px;
     padding: 20px;
-    text-align: justify;
     display: flex;
-    width: 80%;
+    width: 100%;
     background-color: #E67C1C;
     color: #fff;
-    justify-content: space-around;
-    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 main .sobre .container .porcentagens .todasaspercs {
     display: flex;
     width: 100%;
     justify-content: space-between;
-    font-size: 25px;
+    gap: 16px;
+    flex-wrap: wrap;
 }
 
 main .sobre .container .porcentagens .todasaspercs .perc {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-main .sobre .container .porcentagens .todasaspercs .perc .titulo {
-    font-size: 50px;
-    margin: 0;
-}
-
-main .sobre .container .porcentagens .todasaspercs .perc .texto {
-    width: 300px;
+    flex: 1 1 30%;
+    min-width: 180px;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 18px;
+    border-radius: 10px;
     text-align: center;
 }
 
+main .sobre .container .porcentagens .todasaspercs .perc .titulo {
+    font-size: 28px;
+    margin: 0;
+    font-weight: 800;
+}
 
-/* SOLUÇÃO */
+main .sobre .container .porcentagens .todasaspercs .perc .texto {
+    font-size: 14px;
+    margin-top: 8px;
+    color: rgba(255, 255, 255, 0.95);
+}
+
 .solucao {
-    background-color: #f9f9f9;
-    padding: 50px;
+    background-color: #e2e8f0;
+    padding: 48px 20px;
     text-align: center;
 }
 
 .solucao h2 {
-    font-size: 35px;
-    margin-bottom: 10px;
+    font-size: 26px;
+    margin-bottom: 8px;
+    color: #0f172a;
 }
 
 .solucao .subtitulo {
     color: #E67C1C;
-    font-weight: bold;
-    margin-bottom: 20px;
-    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    font-size: 16px;
 }
 
 .solucao .conteudo {
-    max-width: 700px;
+    max-width: 900px;
     margin: auto;
-    font-size: 25px;
+    font-size: 16px;
     line-height: 1.6;
 }
 
 .solucao button {
-    background-color: #E67C1C;
-    color: white;
-    padding: 10px 25px;
+    background: #E67C1C;
+    color: #fff;
+    padding: 10px 22px;
     border: none;
-    border-radius: 25px;
-    margin-top: 20px;
+    border-radius: 999px;
     cursor: pointer;
+    margin-top: 18px;
 }
 
-/* DIFERENCIAIS */
 .diferenciais {
-    padding: 50px;
+    padding: 48px 20px;
     text-align: center;
 }
 
 .diferenciais h2 {
-    font-size: 35px;
-    margin-bottom: 30px;
+    font-size: 26px;
+    margin-bottom: 18px;
 }
 
 .diferenciais .cards {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 20px;
     flex-wrap: wrap;
-    font-size: 25px;
 }
 
 .diferenciais .card {
-    width: 250px;
+    width: 220px;
     background: #e9e9e9;
-    padding: 20px;
+    padding: 18px;
     border-radius: 12px;
-    margin: 10px;
+    box-shadow: 0 6px 18px rgba(2, 6, 23, 0.04);
 }
 
 .diferenciais .card h3 {
-    font-size: 25px;
-    margin-bottom: 10px;
+    font-size: 18px;
+    margin-bottom: 8px;
 }
 
-/* INFORMAÇÕES EXTRAS */
+.diferenciais .card p {
+    font-size: 14px;
+    color: #0f172a;
+}
+
 .info-extra {
     text-align: center;
-    padding: 20px 50px;
-    font-size: 25px;
-    line-height: 1.5;
+    padding: 26px 20px;
+    font-size: 16px;
+    color: #1e293b;
 }
 
-
-/* CONTATO */
 .contato-container {
-    width: 40%;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #00004d;
-    color: white;
+    width: clamp(280px, 40%, 560px);
+    margin: 30px auto;
+    padding: 18px;
+    background-color: #001033cc;
+    color: #fff;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
 }
 
 .contato-container h3 {
     text-align: center;
-    font-size: 25px;
+    font-size: 18px;
+    margin-bottom: 4px;
 }
 
 .contato-container input,
 .contato-container textarea {
-    padding: 10px;
+    padding: 12px;
     border: 0;
-    border-radius: 5px;
+    border-radius: 6px;
+    font-size: 15px;
+    outline: none;
+}
+
+.contato-container input::placeholder,
+.contato-container textarea::placeholder {
+    color: #0b1220;
 }
 
 .contato-container button {
     padding: 10px;
     border: 0;
-    border-radius: 5px;
-    background-color: #E67C1C;
-    color: white;
-    font-weight: bold;
+    border-radius: 8px;
+    background: #E67C1C;
+    color: #fff;
+    font-weight: 700;
     cursor: pointer;
+}
+
+.container_main {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+}
+
+.container_main aside {
+    background: #0f172a;
+    width: 260px;
+    min-height: 100vh;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 18px;
+}
+
+.container_main aside header .nome_user {
+    font-size: 18px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.graficosDashboard,
+.conteinerBoxes,
+.kpiBoxes,
+.cad_campos,
+.cad_pai {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.card-endereco {
+    margin-top: 20px;
+}
+
+.card-Cadastro {
+    margin-top: 0;
 }

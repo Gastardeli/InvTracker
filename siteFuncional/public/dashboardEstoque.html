@@ -59,12 +59,14 @@
                             <span style="color: red" id="kpi1"></span>
                         </p>
                     </div>
-                    <div id="kpiMostrar2" class="kpi" style="display: none;">
+                    <div id="kpiMostrar2" style="display: none; height: auto; width: auto;" class="kpi"
+                        style="display: none;">
                         <p class=" titulo">Quantos Lotes precisam de reabastecimento
                             <span style="color: red" id="kpi2"></span>
                         </p>
                     </div>
-                    <button id="selectVoltar" style="display: none" onclick="location.reload()">Selecionar outro
+                    <button class="botaoVoltarSelect" id="selectVoltar" style="display: none"
+                        onclick="location.reload()">Selecionar outro
                         Estoque</button>
                 </div>
                 <div class="dash_direita">
@@ -104,36 +106,4 @@
         dashboard_diaria.style.display = "block";
         dashboard_estoque.style.display = "none";
     }
-
-    const kpi1 = document.getElementById("kpi1");
-
-    fetch(`/dashEstoque/loteComMaiorNecessidade/${sessionStorage.ID_EMPRESA}`)
-        .then(resposta => resposta.json())
-        .then(produto => {
-            console.log(produto);
-            var mensagem = ``;
-
-            /*COLOCAR KPI*/
-
-            kpi1 = mensagem;
-        })
-        .catch(erro => {
-            console.error('Erro na requisição:', erro);
-        });
-
-    const kpi2 = document.getElementById("kpi2");
-
-    fetch(`/dashEstoque/qtdeLotesReabastecimento/${sessionStorage.ID_EMPRESA}`)
-        .then(resposta => resposta.json())
-        .then(produto => {
-            console.log(produto);
-            var mensagem = ``;
-
-            /*COLOCAR KPI*/
-
-            kpi2 = mensagem;
-        })
-        .catch(erro => {
-            console.error('Erro na requisição:', erro);
-        });
 </script>
