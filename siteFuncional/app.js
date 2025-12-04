@@ -17,7 +17,6 @@ var app = express();
 
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
-var medidasRouter = require("./src/routes/medidas");
 var estoqueRouter = require("./src/routes/estoque");
 var empresasRouter = require("./src/routes/empresas");
 var dashDiariaRouter = require("./src/routes/dashDiaria");
@@ -32,11 +31,10 @@ app.use(cors());
 
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
-app.use("/medidas", medidasRouter);
 app.use("/estoque", estoqueRouter);
 app.use("/empresas", empresasRouter);
 app.use("/dashDiaria", dashDiariaRouter);
-app.use("/dashEstoque", dashEstoqueRouter );
+app.use("/dashEstoque", dashEstoqueRouter);
 app.use("/cadastroProduto", cadastroProdutoRouter);
 
 app.listen(PORTA_APP, function () {
