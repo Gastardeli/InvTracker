@@ -6,24 +6,27 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #f7a8389d;
+    background-color: #f1f5f9; /* Cinza Claro */
 }
 
 .containerDashboard b {
     font-size: 25px;
+    color: #1e293b;
 }
 
+/* CARDS BRANCOS PADRONIZADOS */
 .RandomBox {
     display: flex;
     height: 100px;
     width: 500px;
     flex-direction: column;
-    border: solid grey 2px;
+    border: 1px solid #e2e8f0; /* Borda sutil */
     border-radius: 10px;
     margin: 5px;
-    background-color: white;
+    background-color: #ffffff; /* Fundo branco */
     justify-content: center;
     align-items: center;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
 }
 
 .EstBox {
@@ -31,12 +34,13 @@
     height: 50px;
     width: 500px;
     flex-direction: column;
-    border: solid grey 2px;
+    border: 1px solid #e2e8f0;
     border-radius: 10px;
     margin: 5px;
-    background-color: white;
+    background-color: #ffffff;
     justify-content: center;
     align-items: center;
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06);
 }
 
 .lotenBox {
@@ -44,10 +48,10 @@
     height: 50px;
     width: 300px;
     flex-direction: column;
-    border: solid grey 2px;
+    border: 1px solid #e2e8f0;
     border-radius: 10px;
     margin: 5px;
-    background-color: white;
+    background-color: #ffffff;
     justify-content: center;
     align-items: center;
 }
@@ -65,17 +69,19 @@
     display: flex;
     height: 150px;
     flex-direction: column;
-    border: solid grey 2px;
+    border: 2px solid #E67C1C; /* Destaque Laranja */
     border-radius: 10px;
     margin: 5px;
     align-items: center;
-    background-color: white;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
 }
 
 .kpiBoxes .kpiBox p {
     font-size: 20px;
     margin-left: 10px;
     margin-right: 10px;
+    color: #334155;
 }
 
 .graficosDashboard {
@@ -106,7 +112,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    gap: 10px;
+    gap: 15px;
     height: 500px;
     width: 1000px;
     align-items: center;
@@ -117,11 +123,12 @@
     display: flex;
     height: 270px;
     width: 490px;
-    border: solid grey 2px;
+    border: 1px solid #e2e8f0;
     border-radius: 10px;
     align-items: center;
     justify-content: center;
-    background-color: white;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
 }
 
 .dashboard {
@@ -145,8 +152,9 @@
 .header .container .dashNav .title a {
     outline: none;
     text-decoration: none;
-    color: black;
+    color: #1e293b;
     marker: none;
+    font-weight: bold;
 }
 
 .iconHelpDiv {
@@ -162,9 +170,12 @@
 .iconHelpDiv a {
     margin-top: 30px;
     text-decoration: none;
-    color: black;
+    color: #64748b;
     font-weight: bold;
     align-self: center;
     margin-right: 20px;
+    transition: 0.3s;
 }
-
+.iconHelpDiv a:hover {
+    color: #E67C1C;
+}

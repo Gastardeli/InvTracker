@@ -28,13 +28,13 @@
             </header>
             <div class="body">
                 <a href="dashboardDiaria.html">
-                    <p id="click">DashBoard Diária</p>
+                    <p>DashBoard Diária</p>
                 </a>
                 <a href="#">
-                    <p><b>DashBoard Estoque</b></p>
+                    <p id="click"><b>DashBoard Estoque</b></p>
                 </a>
                 <a href="dashboardCadastro.html">
-                    <p>Cadastrar Estoque</p>
+                    <p>Atualizar Produtos</p>
                 </a>
             </div>
             <div id="icon_help" class="iconHelpDiv">
@@ -50,33 +50,39 @@
             </div>
 
         </aside>
+
         <div class="container_direita2">
             <div id="dashboard_estoque">
                 <div class="select_esquerda">
-                    <div class="kpi">
-                        <div class="titulo">
-                            <p>Selecione seu estoque</p>
-                            <select id="selectEstoque" onchange="atualizarGraficos()">
-                                <option value="#" disabled selected>Selecione uma Opção</option>
-                                <option value="1">Estoque 1</option>
-                                <option value="2">Estoque 2</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="kpi">
+                    <div id="kpiMostrar1" class="kpi" style="display: none;">
                         <p class="titulo">Lote com maior necessidade de reposição
-                            <span style="color: red">Lote 05</span>
+                            <span style="color: red" id="kpi1"></span>
                         </p>
                     </div>
-                    <div class="kpi">
-                        <p class="titulo">Quantos Lotes precisam de reabastecimento
-                            <span style="color: red">2</span>
+                    <div id="kpiMostrar2" class="kpi" style="display: none;">
+                        <p class=" titulo">Quantos Lotes precisam de reabastecimento
+                            <span style="color: red" id="kpi2"></span>
                         </p>
                     </div>
+                    <button id="selectVoltar" style="display: none" onclick="location.reload()">Selecionar outro
+                        Estoque</button>
                 </div>
                 <div class="dash_direita">
                     <canvas id="dashboard1"></canvas>
                     <canvas id="dashboard2"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="modalKpi0" id="modalGrande">
+            <div class="kpi" id="kpi0">
+                <div class="titulo">
+                    <p>Selecione seu estoque</p>
+                    <select id="selectEstoque" onchange="atualizarGraficos()">
+                        <option value="#" disabled selected>Selecione uma Opção</option>
+                        <option value="1">Estoque 1</option>
+                        <option value="2">Estoque 2</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -86,6 +92,8 @@
 </html>
 
 <script>
+    const nomeUser = document.getElementById("nomeUsuario");
+    nomeUser.innerHTML = `Olá! ${sessionStorage.NOME_USUARIO}`
 
     function redirectEstoque() {
         dashboard_diaria.style.display = "none";
@@ -96,4 +104,36 @@
         dashboard_diaria.style.display = "block";
         dashboard_estoque.style.display = "none";
     }
+
+    const kpi1 = document.getElementById("kpi1");
+
+    fetch(`/dashEstoque/loteComMaiorNecessidade/${sessionStorage.ID_EMPRESA}`)
+        .then(resposta => resposta.json())
+        .then(produto => {
+            console.log(produto);
+            var mensagem = ``;
+
+            /*COLOCAR KPI*/
+
+            kpi1 = mensagem;
+        })
+        .catch(erro => {
+            console.error('Erro na requisição:', erro);
+        });
+
+    const kpi2 = document.getElementById("kpi2");
+
+    fetch(`/dashEstoque/qtdeLotesReabastecimento/${sessionStorage.ID_EMPRESA}`)
+        .then(resposta => resposta.json())
+        .then(produto => {
+            console.log(produto);
+            var mensagem = ``;
+
+            /*COLOCAR KPI*/
+
+            kpi2 = mensagem;
+        })
+        .catch(erro => {
+            console.error('Erro na requisição:', erro);
+        });
 </script>

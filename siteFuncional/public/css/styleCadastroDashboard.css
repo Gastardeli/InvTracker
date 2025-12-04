@@ -4,6 +4,7 @@
     align-items: center;
     height: 100vh;
     width: 75%;
+    /* Imagem de fundo mantida */
     background-image: url(../assets/imgs/cadastroProduto_Background.jpg);
     background-size: cover;
     background-position: center;
@@ -21,14 +22,14 @@
     display: flex;
     height: 85%;
     width: 50%;
-    border: solid black 2px;
-    background-color: rgba(0, 0, 0, 0.8);
+    /* MUDANÇA: Fundo branco opaco em vez de preto transparente */
+    background-color: #ffffff;
     border-radius: 10px;
     align-self: center;
     align-items: center;
     flex-direction: column;
     border: 2px solid #E67C1C;
-
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
 }
 
 .box_cadDash h1 {
@@ -37,47 +38,61 @@
     display: flex;
     width: 100%;
     height: 10%;
-    color: white;
+    color: #E67C1C; /* Título laranja */
     font-size: 25px;
+    margin-top: 20px;
 }
 
 .box_cadDash input {
     border-radius: 10px;
     width: 60%;
-    height: 7%;
+    height: 40px; /* Altura fixa melhor */
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid #E67C1C;
-    background-color: white;
+    border: 1px solid #cbd5e1; /* Cinza */
+    background-color: #f8fafc;
     margin-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     font-size: 15px;
+    color: #334155;
+    outline: none;
+    transition: 0.3s;
+}
 
+.box_cadDash input:focus {
+    border: 2px solid #E67C1C;
+    background-color: #fff;
 }
 
 .box_cadDash select {
     border-radius: 10px;
     width: 50%;
-    height: 4%;
+    height: 40px;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid #E67C1C;
-    background-color: white;
+    border: 1px solid #cbd5e1;
+    background-color: #f8fafc;
     margin-top: 7px;
     margin-bottom: 7px;
-    font-size: 20px;
+    font-size: 18px;
+    color: #334155;
+    outline: none;
+}
+
+.box_cadDash select:focus {
+    border: 2px solid #E67C1C;
 }
 
 .box_cadDash b {
     margin-bottom: 5px;
     margin-top: 5px;
     font-weight: bolder;
-    font-size: 21px;
-    color: white;
+    font-size: 18px;
+    color: #1e293b; /* Texto escuro */
 }
 
 .box_cadDash button {
@@ -89,13 +104,19 @@
     margin-top: 20px;
     cursor: pointer;
     margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.3s;
+}
 
+.box_cadDash button:hover {
+    background-color: #c0630f;
 }
 
 .container_modal_cadProd {
     width: 100%;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(30, 41, 59, 0.9); /* Navy transparente */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -103,7 +124,7 @@
     top: 0;
     left: 0;
     position: absolute;
-    padding-top: 300px;
+    /* padding-top removido para centralizar melhor */
 }
 
 .box_modal_cadProd {
@@ -111,20 +132,26 @@
     align-items: center;
     justify-content: center;
     height: 70%;
+    width: 100%;
 }
 
 .modal_cadProd {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 45%;
     background-color: white;
     border-radius: 10px;
-    border: #E67C1C 8px solid;
+    border: 2px solid #E67C1C; /* Borda ajustada */
+    padding: 20px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
 }
 
 .modal_cadProd p {
     margin-left: 10px;
     margin-right: 10px;
+    color: #334155;
 }
 
 .modal_cadProd button {
@@ -137,6 +164,7 @@
     cursor: pointer;
     margin-bottom: 20px;
     font-size: 15px;
+    font-weight: bold;
 }
 
 .iconHelpDiv {
@@ -152,10 +180,13 @@
 .iconHelpDiv a {
     margin-top: 30px;
     text-decoration: none;
-    color: black;
+    color: #64748b;
     font-weight: bold;
     align-self: center;
     margin-right: 20px;
+}
+.iconHelpDiv a:hover {
+    color: #E67C1C;
 }
 
 .container_main aside .body {

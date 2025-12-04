@@ -31,7 +31,7 @@
                     <p>DashBoard Estoque</p>
                 </a>
                 <a href="dashboardCadastro.html">
-                    <p>Cadastrar Estoque</p>
+                    <p>Atualizar Produtos</p>
                 </a>
 
             </div>
@@ -58,7 +58,7 @@
                         </span>
                     </div>
                     <div class="kpi">
-                        <p class="titulo">Produto proximo do vencimento
+                        <p class="titulo">Produto mais perto do vencimento
                             <span id="kpi3">
                             </span>
                         </p>
@@ -79,6 +79,8 @@
 
 <script src="js/dashDiariajs.js"></script>
 <Script>
+    const nomeUser = document.getElementById("nomeUsuario");
+    nomeUser.innerHTML = `Olá! ${sessionStorage.NOME_USUARIO}`
 
     const kpi1 = document.getElementById("kpi1");
 
@@ -95,7 +97,7 @@
                     var atualProduto = atual.fkProduto;
                     var atualEstoqueNome = atual.estoqueNome;
 
-                    mensagem += `O ${atualEstoqueNome}: <br>`
+                    mensagem += `Estoque ${atualEstoque} - Lote ${atualLote} <br>`
 
                 }
             }
@@ -112,6 +114,7 @@
     fetch(`/dashDiaria/kpiProdutoVencido/${sessionStorage.ID_EMPRESA}`)
         .then(resposta => resposta.json())
         .then(produto => {
+            console.log(produto);
             if (produto.length == 0) {
                 kpi3.innerHTML = `Não há nenhum produto cadastrado.`
             }
@@ -128,7 +131,7 @@
 
             kpi3.innerHTML = `${produto[0].nomeProduto} <br> Validade ${dataFormatada} <br> Estoque: ${produto[0].idEstoque} <br> Lote: ${produto[0].idLote} <br> ${venceu}`
 
-            console.log(produto);
+
         })
         .catch(erro => {
             console.error('Erro na requisição:', erro);

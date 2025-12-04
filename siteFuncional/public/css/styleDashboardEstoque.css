@@ -3,14 +3,15 @@
     display: flex;
 }
 
+/* ASIDE (Redundante com style.css, mas mantido para garantir integridade caso carregue sozinho) */
 .container_main aside {
-    background-color: #E67C1C;
+    background-color: #1e293b; /* Navy */
     width: 25%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     min-height: 100vh;
-    border-right: 2px solid black;
+    border-right: 1px solid #0f172a;
 }
 
 .container_main aside header {
@@ -25,11 +26,12 @@
     width: 100vh;
     margin-right: 10px;
     font-size: 30px;
-    color: #000;
+    color: #f8fafc;
 }
 
 .container_main aside header img {
     width: 100px;
+    filter: brightness(0) invert(1);
 }
 
 .container_main aside .body {
@@ -45,7 +47,8 @@
     font-size: 30px;
     cursor: pointer;
     text-decoration: none;
-    color: #000;
+    color: #94a3b8;
+    transition: 0.3s;
 }
 
 .container_main aside .body a {
@@ -53,7 +56,11 @@
 }
 
 .container_main aside .body p:hover {
-    border-bottom: 2px solid #000;
+    border-bottom: 2px solid #E67C1C;
+    color: #fff;
+}
+.container_main aside .body p#click {
+    color: #E67C1C;
 }
 
 .container_main aside .body a .container_main aside .footer {
@@ -64,15 +71,17 @@
 }
 
 .container_main aside .footer {
-    border-top: 2px solid black;
+    border-top: 1px solid #334155;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 30px;
+    background-color: #1a2433;
 }
 
 .container_main aside .footer img {
     height: 60px;
+    filter: brightness(0) invert(1);
 }
 
 .footerTexto {
@@ -82,30 +91,34 @@
     align-items: flex-start;
     width: 100vh;
     margin-left: 10px;
+    color: #fff;
 }
 
 .container_main aside .footer .logout button {
-    background-color: #E67C1C;
+    background-color: #fff;
     border-radius: 10px;
     width: 100px;
     cursor: pointer;
     color: #fff;
+    color: #E67C17;
     border: 0;
     padding: 5px 10px;
     font-size: 25px;
-    border: 1.5px solid black;
-    color: #000;
+    border: 2px solid #E67C1C;
 }
 
 .container_main aside .footer .logout button:hover {
-    background-color: #df86339f;
+    background-color: #E67C1C;
+    color: #fff;
 }
 
 .container_main aside .footer .logout button a {
     text-decoration: none;
-    color: #000;
+    color: #fff;
 }
 
+
+/* CONTEÚDO DIREITA */
 
 .container_main .container_direita .kpi_dash1 {
     display: flex;
@@ -113,7 +126,6 @@
     height: 300px;
     padding: 20px;
     justify-content: space-between;
-
 }
 
 .container_main .container_direita .kpi_dash1 .box_kpi {
@@ -123,19 +135,20 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-
 }
 
 .container_main .container_direita .kpi_dash1 .box_kpi .kpi1 {
-    background-color: rgb(231, 231, 231);
+    background-color: #ffffff; /* Card Branco */
     border-radius: 10px;
     margin-bottom: 10px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); /* Sombra suave */
 }
 
 .container_main .container_direita .kpi_dash1 .box_kpi .kpi2 {
     width: 100%;
-    background-color: rgb(231, 231, 231);
+    background-color: #ffffff;
     border-radius: 10px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
 }
 
 .container_main .container_direita .kpi_dash1 .dash1 {
@@ -163,13 +176,11 @@
 .container_direita #dashboard_estoque {
     width: 100%;
     display: flex;
-
 }
 
 .container_direita #dashboard_estoque .select_esquerda {
     display: flex;
     flex-direction: column;
-
 }
 
 .container_direita #dashboard_estoque .select_direita {
@@ -178,9 +189,9 @@
 }
 
 .container_main .container_direita2 {
+    background-color: #f1f5f9; /* Fundo Cinza Claro */
     width: 75%;
     display: flex;
-
 }
 
 .container_main .container_direita2 #dashboard_estoque {
@@ -193,6 +204,7 @@
 
 .container_main .container_direita2 #dashboard_estoque .dash_direita {
     width: 100%;
+    position: relative;
     height: 40vh;
     margin-top: 6vh;
     display: flex;
@@ -211,10 +223,11 @@
     margin-left: 100px;
 }
 
+/* KPI COM BORDA LARANJA DESTACADA */
 .container_main .container_direita2 #dashboard_estoque .select_esquerda .kpi {
-    border: 2px solid;
+    border: 2px solid #E67C1C; /* Laranja forte */
     display: flex;
-    background-color: rgb(231, 231, 231);
+    background-color: #ffffff; /* Fundo branco */
     text-align: center;
     margin-top: 40px;
     border-radius: 10px;
@@ -223,6 +236,7 @@
     flex-direction: column;
     height: 20vh;
     width: 40vh;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
 }
 
 .container_main .container_direita2 #dashboard_estoque .select_esquerda select {
@@ -230,11 +244,12 @@
     align-items: center;
     justify-content: center;
     height: 30px;
-    width: 170px;
-    border: 2px solid #DF8533;
-    background-color: white;
+    width: 200px;
+    border: 1px solid #cbd5e1; /* Cinza */
+    background-color: #fff;
     border-radius: 10px;
     font-weight: bold;
+    color: #1e293b;
 }
 
 .container_main .container_direita2 #dashboard_estoque .select_esquerda .titulo {
@@ -244,6 +259,7 @@
     display: flex;
     flex-direction: column;
     font-size: 20px;
+    color: #1e293b;
 }
 
 .container_main .container_direita2 #dashboard_estoque .select_esquerda span {
@@ -264,14 +280,40 @@
 .iconHelpDiv a {
     margin-top: 30px;
     text-decoration: none;
-    color: black;
+    color: #64748b;
     font-weight: bold;
     align-self: center;
     margin-right: 20px;
+    transition: 0.3s;
+}
+.iconHelpDiv a:hover {
+    color: #E67C1C;
 }
 
+/* BOTÃO ESTILO GHOST (Borda Laranja, fundo branco) */
 .botaoDeletar {
-        background-color: #E67C1C;
+    background-color: #fff;
+    border-radius: 10px;
+    width: 200px;
+    height: 50px;
+    cursor: pointer;
+    color: #E67C1C;
+    border: 0;
+    padding: 5px 10px;
+    font-size: 18px;
+    border: 2px solid #E67C1C;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.botaoDeletar:hover {
+    background-color: #E67C1C;
+    color: #fff;
+}
+
+#selectVoltar {
+    margin-top: 10%;
+    background-color: #E67C1C;
     border-radius: 10px;
     width: 200px;
     height: 50px;
@@ -280,6 +322,55 @@
     border: 0;
     padding: 5px 10px;
     font-size: 18px;
-    border: 1.5px solid black;
-    color: #000;
+    border: 2px solid #E67C1C;
+}
+
+.modalKpi0 {
+    position: absolute;
+    width: 75%;
+    height: 100%;
+    left: 25%;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(30, 41, 59, 0.9); /* Navy transparente */
+}
+
+.modalKpi0 .kpi {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 2px solid #E67C1C;
+    background-color: #ffffff;
+    text-align: center;
+    margin-top: 40px;
+    border-radius: 10px;
+    height: 30vh;
+    width: 35%;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.modalKpi0 .kpi select {
+    border-radius: 12px;
+    width: 300px;
+    height: 35px;
+    cursor: pointer;
+    color: #333;
+    border: 0;
+    padding: 5px 10px;
+    font-size: 18px;
+    border: 1px solid #cbd5e1;
+    text-align: center;
+}
+
+.modalKpi0 .kpi .titulo p {
+    font-size: 30px;
+    color: #1e293b;
+}
+
+.botaoVoltarSelect:hover {
+    background-color: #E67C1C;
+    color: #fff;
 }

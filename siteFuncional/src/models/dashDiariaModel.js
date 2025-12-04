@@ -3,10 +3,9 @@ var database = require("../database/config")
 
 function kpiProdutoVencido(idEmpresa) {
     var instrucao = `
-        SELECT * FROM vw_kpiProdutoVencido
-        WHERE idEmpresa = ${idEmpresa}
-        ORDER BY dtValidade ASC
-        LIMIT 1;
+        SELECT * from vw_kpiProdutoVencido 
+        WHERE idEmpresa = ${idEmpresa} AND 
+        (SELECT MIN(dtValidade) FROM vw_kpiProdutoVencido);
         `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -14,7 +13,7 @@ function kpiProdutoVencido(idEmpresa) {
 
 function kpiQtdLotesReposicao(idEmpresa) {
     var instrucao = `
-SELECT 
+    SELECT 
     l.fkEstoque,
     l.idLote,
     l.fkProduto,
@@ -29,13 +28,13 @@ SELECT
     sensor s ON s.idSensor = l.fkSensor
         JOIN
     (SELECT 
-        fkSensor, MAX(dtRegistro) AS ultimoRegistro
+        fkSensor, MAX(idRegistro) AS ultimoRegistro
     FROM
         registro
     GROUP BY fkSensor) ult ON ult.fkSensor = s.idSensor
         JOIN
     registro r ON r.fkSensor = s.idSensor
-    AND r.dtRegistro = ult.ultimoRegistro
+    AND r.idRegistro = ult.ultimoRegistro
         WHERE
     e.fkEmpresa = ${idEmpresa}
     AND 
@@ -66,8 +65,8 @@ function deletarRegistro(idEmpresa) {
             FROM lote l
             JOIN produto p ON l.fkProduto = p.idProduto
             WHERE l.fkEmpresa = ${idEmpresa}
-            ORDER BY dtValidade ASC
-            LIMIT 1
+            AND 
+        (SELECT MIN(dtValidade) FROM vw_kpiProdutoVencido)
         ) AS DeleteRegistro
     );
     `;
@@ -87,16 +86,15 @@ function graficoLotesDefasados(idEmpresa) {
         JOIN sensor s 
             ON s.idSensor = l.fkSensor
         JOIN (
-            -- Último registro de cada sensor
             SELECT r1.*
             FROM registro r1
             JOIN (
-                SELECT fkSensor, MAX(dtRegistro) AS ultimo_registro
+                SELECT fkSensor, MAX(idRegistro) AS ultimo_registro
                 FROM registro
                 GROUP BY fkSensor
             ) r2 
             ON r1.fkSensor = r2.fkSensor 
-            AND r1.dtRegistro = r2.ultimo_registro
+            AND r1.idRegistro = r2.ultimo_registro
         ) AS r
         ON r.fkSensor = s.idSensor
         WHERE l.fkEmpresa = ${idEmpresa}

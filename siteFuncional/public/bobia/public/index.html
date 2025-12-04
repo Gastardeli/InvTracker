@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InvTracker | Home N3</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="./icon.png" /> 
+    <link rel="icon" href="./icon.png" />
 </head>
 
 <body>
@@ -35,10 +35,7 @@
                 </a>
             </div>
             <div class="footer">
-                <div id="username" class="footerTexto"></div>
-                <div class="logout">
-                    <a href="http://localhost:3333"><button>Sair</button></a>
-                </div>
+                <a href="http://localhost:3333"><button>Sair</button></a>
             </div>
         </aside>
 
@@ -46,39 +43,37 @@
         <div class="main" id="container">
 
             <h1>BobIA</h1>
-            <textarea id="pergunta" type="text" placeholder="Digite a pergunta..."></textarea>
+            <textarea class="bobIaInput" id="pergunta" type="text" placeholder="Digite a pergunta..."></textarea>
 
             <br><br>
 
             <button onclick="gerarResposta()">Gerar Resposta</button>
             <h3>Resposta da IA:</h3>
 
-        <div id="resposta" class="campo_resposta"></div>
-    </div>
+            <div id="resposta" class="campo_resposta"></div>
+        </div>
 
-    
+
 </body>
+
 </html>
 
 <script>
-    
-    username.innerHTML = 'Vitor Hideki';
-        
-        async function gerarResposta() {
-            const pergunta = document.getElementById('pergunta').value;
+    async function gerarResposta() {
+        const pergunta = document.getElementById('pergunta').value;
 
-            const response = await fetch('/perguntar', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ pergunta })
-            });
+        const response = await fetch('/perguntar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ pergunta })
+        });
 
-            const data = await response.json();
+        const data = await response.json();
 
-            resposta.style.display = 'block';
-            document.getElementById('resposta').innerText = data.resultado;
-        }
+        resposta.style.display = 'block';
+        document.getElementById('resposta').innerText = data.resultado;
+    }
 
-    </script>
+</script>

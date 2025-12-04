@@ -1,15 +1,29 @@
 
 function atualizarGraficos() {
     var idEstoque = selectEstoque.value;
-    if (idEstoque == "#") {
-    }
+    idEstoque.value = idEstoque;
     obterDadosGrafico2(idEstoque);
     obterDadosGrafico1(idEstoque);
+
+    const kpi1 = document.getElementById("kpiMostrar1");
+    const kpi2 = document.getElementById("kpiMostrar2");
+    const Voltar = document.getElementById("selectVoltar");
+    const kpi0 = document.getElementById("kpi0")
+    const modal = document.getElementById("modalGrande");
+
+
+
+    kpi1.style.display = "block";
+    kpi2.style.display = "block";
+    selectEstoque.style.display = "none";
+    Voltar.style.display = "block";
+    kpi0.style.display = "none";
+    modal.style.display = "none";
 }
 
 
-function obterDadosGrafico1(idEstoque) {
-    fetch(`/dashEstoque/graficoDoisEstadoCritico/${idEstoque}`, { cache: 'no-store' })
+function obterDadosGrafico1(idEstoque, idEmpresa) {
+    fetch(`/dashEstoque/graficoDoisEstadoCritico/${idEstoque}/${sessionStorage.ID_EMPRESA}`, { cache: 'no-store' })
         .then(response => {
             if (!response.ok) throw new Error('Erro ao carregar dados');
             return response.json();
@@ -27,8 +41,8 @@ function obterDadosGrafico1(idEstoque) {
 }
 
 
-function obterDadosGrafico2(idEstoque) {
-    fetch(`/dashEstoque/graficoOcupacaoLotes/${idEstoque}`, { cache: 'no-store' })
+function obterDadosGrafico2(idEstoque, idEmpresa) {
+    fetch(`/dashEstoque/graficoOcupacaoLotes/${idEstoque}/${sessionStorage.ID_EMPRESA}`, { cache: 'no-store' })
         .then(response => {
             if (!response.ok) throw new Error('Erro ao carregar dados');
             return response.json();

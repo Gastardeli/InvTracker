@@ -27,13 +27,13 @@
             </header>
             <div class="body">
                 <a href="dashboardDiaria.html">
-                    <p id="click">DashBoard Diária</p>
+                    <p>DashBoard Diária</p>
                 </a>
                 <a href="dashboardEstoque.html">
                     <p>DashBoard Estoque</p>
                 </a>
                 <a href="#">
-                    <p><b>Cadastrar Estoque</b></p>
+                    <p id="click"><b>Atualizar Produtos</b></p>
                 </a>
             </div>
             <div id="icon_help" class="iconHelpDiv">
@@ -78,17 +78,17 @@
                         <option disabled selected value="#">Selecione uma Opção</option>
                     </select id="lotes">
                     <b>Nome do Produto</b>
-                    <input value="Paçoca" id="input_produto" placeholder="Paçoca" type="text">
+                    <input id="input_produto" placeholder="Paçoca" type="text" maxlength="50">
                     <b>Data de Fabricação</b>
                     <input id="input_dtFab" placeholder="24/12/2025" type="date">
                     <b>Data de Validade</b>
                     <input id="input_dtValidade" placeholder="24/12/2026" type="date">
                     <b>Fabricante</b>
-                    <input value="Paçoquitas Paulinas" id="input_fabricante" placeholder="Paçoquita" type="text">
+                    <input id="input_fabricante" maxlength="45" placeholder="Paçoquita" type="text">
                     <b>Valor compra Lote</b>
-                    <input value="10000" id="input_compraLote" placeholder="R$ 10.000" type="number">
+                    <input id="input_compraLote" placeholder="R$ 10.000" type="number">
                     <b>Valor venda lote</b>
-                    <input value="25000" id="input_vendaLote" placeholder="R$ 25.000" type="number">
+                    <input id="input_vendaLote" placeholder="R$ 25.000" type="number">
                     <button onclick="cadastrarProduto()"><b>Cadastrar Produto</b></button>
 
                 </div>
