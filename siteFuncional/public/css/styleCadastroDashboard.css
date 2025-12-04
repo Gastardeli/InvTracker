@@ -4,7 +4,6 @@
     align-items: center;
     height: 100vh;
     width: 75%;
-    /* Imagem de fundo mantida */
     background-image: url(../assets/imgs/cadastroProduto_Background.jpg);
     background-size: cover;
     background-position: center;
@@ -14,7 +13,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 85%;
+    min-height: 85%;
     width: 80%;
 }
 
@@ -22,8 +21,7 @@
     display: flex;
     height: 85%;
     width: 50%;
-    /* MUDANÇA: Fundo branco opaco em vez de preto transparente */
-    background-color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.7);
     border-radius: 10px;
     align-self: center;
     align-items: center;
@@ -38,7 +36,7 @@
     display: flex;
     width: 100%;
     height: 10%;
-    color: #E67C1C; /* Título laranja */
+    color: #E67C1C;
     font-size: 25px;
     margin-top: 20px;
 }
@@ -46,12 +44,12 @@
 .box_cadDash input {
     border-radius: 10px;
     width: 60%;
-    height: 40px; /* Altura fixa melhor */
+    height: 40px; 
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #cbd5e1; /* Cinza */
+    border: 1px solid #cbd5e1; 
     background-color: #f8fafc;
     margin-top: 5px;
     margin-bottom: 10px;
@@ -92,7 +90,7 @@
     margin-top: 5px;
     font-weight: bolder;
     font-size: 18px;
-    color: #1e293b; /* Texto escuro */
+    color: #ffffff; 
 }
 
 .box_cadDash button {
@@ -116,7 +114,7 @@
 .container_modal_cadProd {
     width: 100%;
     height: 100vh;
-    background-color: rgba(30, 41, 59, 0.9); /* Navy transparente */
+    background-color: rgba(30, 41, 59, 0.9); 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -124,7 +122,7 @@
     top: 0;
     left: 0;
     position: absolute;
-    /* padding-top removido para centralizar melhor */
+  
 }
 
 .box_modal_cadProd {
@@ -143,7 +141,7 @@
     width: 45%;
     background-color: white;
     border-radius: 10px;
-    border: 2px solid #E67C1C; /* Borda ajustada */
+    border: 2px solid #E67C1C; 
     padding: 20px;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
 }
