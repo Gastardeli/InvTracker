@@ -95,7 +95,7 @@ CREATE TABLE lote (
 );
 
 INSERT INTO estoque (idEstoque, tamanho, estoqueNome, fkEmpresa) VALUES
-    (1, 100, 'Estoque A1', 1),
+    (1, 23, 'Estoque A1', 1),
     (2, 150, 'Estoque A2', 1);
 
     INSERT INTO estoque (idEstoque, tamanho, estoqueNome, fkEmpresa) VALUES
@@ -155,8 +155,8 @@ INSERT INTO estoque (idEstoque, tamanho, estoqueNome, fkEmpresa) VALUES
     (6, 12, 2, 2, 12, '2025-04-06 15:00:00', NULL);
     
 INSERT INTO registro (fkSensor, distancia, dtRegistro) VALUES
-(2, 90, '2025-01-15 10:05:00'),
-(3, 85, '2025-01-15 10:10:00'),
+(2, 10, '2025-01-15 10:05:00'),
+(3, 15, '2025-01-15 10:10:00'),
 (4, 125, '2025-01-15 10:15:00'),
 (5, 50, '2025-01-15 10:20:00'),
 (6, 40, '2025-01-15 10:25:00'),
