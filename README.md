@@ -32,7 +32,7 @@ Back-end <br>
  ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
  ![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white)
  ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
- ![Arduino IDE](https://img.shields.io/badge/arduino-%23323330.svg?style=for-the-badge&logo=arduino&logoColor=%23F7DF1E)
+ ![Arduino IDE](https://img.shields.io/badge/arduino-%23323330.svg?style=for-the-badge&logo=arduino&logoColor=%79D2E6)
 ![VirtualBox](https://img.shields.io/badge/virtualbox-%23323330.svg?style=for-the-badge&logo=virtualBox&logoColor=%ffffff)
 ![Git](https://img.shields.io/badge/git-%23323330.svg?style=for-the-badge&logo=git&logoColor=%23F7DF1E)
 
