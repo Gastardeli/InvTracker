@@ -1,24 +1,24 @@
 <h1 align=center>📦 InvTracker </h1> 
 <div align="center"> <img width="600" alt="Banner do InvTracker" src="https://github.com/user-attachments/assets/0355b62a-f1bf-4b65-bcdc-2c485d3e3c7d" /> </div> <p align="center"> Sistema de monitoramento e controle de estoque para atacados.<br> <strong>Reduza perdas. Aumente a eficiência. Tome decisões com dados.</strong> </p>
 
-## 📘 Sobre o Projeto
+## Sobre o Projeto
 
 O **InvTracker** é um software desenvolvido para auxiliar operações de atacado na gestão e controle de estoque.  
 Ele proporciona mais precisão no acompanhamento de produtos, reduz perdas por erros e melhora o processo de reposição.
 
 Principais objetivos:
 
-- 🔍 Reduzir perdas de inventário  
-- 📊 Acompanhar indicadores em tempo real  
-- ♻️ Otimizar reposição e fluxo de mercadorias  
+- Reduzir perdas de inventário  
+- Acompanhar indicadores em tempo real  
+- Otimizar reposição e fluxo de mercadorias  
 
-## 🚀 Funcionalidades
+## Funcionalidades
 
-- ✔️ Cadastro de produtos;
-- ✔️ Dashboard com gráficos e métricas;
-- ✔️ Controle de estoque em tempo real; 
-- ✔️ Análises baseadas em indicadores;
-- ✔️ Interface responsiva.
+- Cadastro de produtos;
+- Dashboard com gráficos e métricas;
+- Controle de estoque em tempo real; 
+- Análises baseadas em indicadores;
+- Interface responsiva.
 
 # Tecnologias utilizadas
 
